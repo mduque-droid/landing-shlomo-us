@@ -7,10 +7,10 @@ const Services = ({ data }) => {
       <Container>
         <div className="max-w-2xl mx-auto text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Servicios Enterprise
+            Enterprise Services
           </h2>
           <p className="text-xl text-gray-600">
-            Soluciones especializadas para infraestructura, cumplimiento y transformación digital.
+            Specialized solutions for infrastructure, compliance, and digital transformation.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">

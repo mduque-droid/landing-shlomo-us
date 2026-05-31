@@ -7,10 +7,10 @@ const Portfolio = ({ data }) => {
       <Container>
         <div className="max-w-2xl mx-auto text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Portafolio
+            Portfolio
           </h2>
           <p className="text-xl text-gray-600">
-            Casos de éxito en migración cloud, cumplimiento regulatorio e ingeniería de software.
+            Success stories in cloud migration, regulatory compliance, and software engineering.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
