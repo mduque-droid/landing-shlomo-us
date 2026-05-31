@@ -7,10 +7,10 @@ const Features = ({ data }) => {
       <Container>
         <div className="max-w-2xl mx-auto text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Por Qué Shlomo
+            Why Shlomo
           </h2>
           <p className="text-xl text-gray-600">
-            Nuestros diferenciales. Lo que nos hace únicos en el mercado.
+            Our differentiators. What makes us unique in the market.
           </p>
         </div>
         <div className="grid md:grid-cols-4 gap-12">

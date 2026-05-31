@@ -1,5 +1,6 @@
 import Container from '../layout/Container';
 import Icon from '../atomic/Icon';
+import logo from '../../assets/shlomo-logo.png';
 
 const Footer = ({ company, footer }) => {
   return (
@@ -8,32 +9,30 @@ const Footer = ({ company, footer }) => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-cyan-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
-              <span className="font-bold text-white">{company.name}</span>
+            <div className="flex items-center gap-3 mb-4">
+              <img src={logo} alt="Shlomo Logo" className="h-8 w-auto" />
+              <span className="font-bold text-white text-sm">{company.name}</span>
             </div>
             <p className="text-sm text-gray-400">{company.tagline}</p>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="font-bold text-white mb-4">Empresa</h4>
+            <h4 className="font-bold text-white mb-4">Company</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="#services" className="hover:text-cyan-600 transition-colors">
-                  Servicios
+                  Services
                 </a>
               </li>
               <li>
                 <a href="#portfolio" className="hover:text-cyan-600 transition-colors">
-                  Portafolio
+                  Portfolio
                 </a>
               </li>
               <li>
                 <a href="#features" className="hover:text-cyan-600 transition-colors">
-                  Por Qué Shlomo
+                  Why Shlomo
                 </a>
               </li>
             </ul>
@@ -55,7 +54,7 @@ const Footer = ({ company, footer }) => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-white mb-4">Contacto</h4>
+            <h4 className="font-bold text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
