@@ -9,10 +9,12 @@ import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
 import LegalModal from './components/atomic/LegalModal';
 import MigrationModal from './components/atomic/MigrationModal';
+import ContactFormModal from './components/sections/ContactFormModal';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
   const [showMigrationModal, setShowMigrationModal] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const handleHeroClick = () => {
     const ctaSection = document.querySelector('#cta');
@@ -43,6 +45,14 @@ function App() {
     setActiveModal(null);
   };
 
+  const handleOpenContactForm = () => {
+    setIsContactFormOpen(true);
+  };
+
+  const handleCloseContactForm = () => {
+    setIsContactFormOpen(false);
+  };
+
   const modalContent = activeModal === 'privacy'
     ? siteData.legal.privacy
     : activeModal === 'terms'
@@ -64,11 +74,12 @@ function App() {
       <Services data={siteData} onShowMigrationModal={() => setShowMigrationModal(true)} />
       <Portfolio data={siteData} />
       <Features data={siteData} />
-      <CTA data={siteData.cta} />
+      <CTA data={siteData.cta} onContactClick={handleOpenContactForm} />
       <Footer
         company={siteData.company}
         footer={siteData.footer}
         onLegalLinkClick={handleOpenLegalModal}
+        ctaData={siteData.cta}
       />
 
       {modalContent && (
@@ -79,6 +90,13 @@ function App() {
           content={modalContent.content}
         />
       )}
+
+      <ContactFormModal
+        isOpen={isContactFormOpen}
+        onClose={handleCloseContactForm}
+        pgpUrl="/.well-known/pgp-public-key.asc"
+        company={siteData.company}
+      />
 
       <MigrationModal
         isOpen={showMigrationModal}

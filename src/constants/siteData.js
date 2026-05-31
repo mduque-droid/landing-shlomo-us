@@ -131,6 +131,8 @@ const siteData = Object.freeze({
     description: "30 minutes is free. You tell us your challenge. We tell you if we can help and how. No BS. No empty promises.",
     button: "Schedule a Call",
     email: "hello@shlomo.us",
+    whatsappNumber: "18624037724",
+    whatsappMessage: "Hello! I'd like to discuss how Shlomo can help with my company's infrastructure needs.",
   }),
 
   footer: Object.freeze({

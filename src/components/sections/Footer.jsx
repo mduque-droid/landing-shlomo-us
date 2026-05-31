@@ -2,7 +2,7 @@ import Container from '../layout/Container';
 import Icon from '../atomic/Icon';
 import logo from '../../assets/shlomo-logo.png';
 
-const Footer = ({ company, footer, onLegalLinkClick }) => {
+const Footer = ({ company, footer, onLegalLinkClick, ctaData }) => {
   return (
     <footer className="bg-slate-900 text-gray-300 py-12">
       <Container>
@@ -75,6 +75,19 @@ const Footer = ({ company, footer, onLegalLinkClick }) => {
                   {company.phone}
                 </a>
               </li>
+              {ctaData?.whatsappNumber && (
+                <li>
+                  <a
+                    href={`https://wa.me/${ctaData.whatsappNumber}?text=${encodeURIComponent(ctaData.whatsappMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-cyan-600 transition-colors inline-flex items-center gap-2"
+                    style={{ color: '#25D366' }}
+                  >
+                    💬 WhatsApp
+                  </a>
+                </li>
+              )}
               <li className="flex gap-4 mt-4">
                 <a href={company.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-600">
                   <Icon name="external-link" size={18} />
