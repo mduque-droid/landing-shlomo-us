@@ -1,0 +1,18 @@
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mI0EZgF2FQEEAPk3x7qY+M9hR4pq8M4j+K2vT8+dQ3kL5pV9mJ6nT9K+vW3nM8x
+9r2mK0pL4nM5oN6pQ7rS8sT9uU0vV1wX2yZ3aA4bB5cC6dD7eE8fF9gG0hH1iI2j
+J3kK4lL5mM6nN7oO8pP9qQ0rR1sS2tT3uU4vV5wW6xX7yY8zZ9aA0bB1cC2dD3eE
+4fF5gG6hH7iI8jJ9kK0lL1mM2nN3oO4pP5qQ6rR7sS8tT9uU0vV1wW2xX3yY4zZ5a
+AQQABQ==
+=BcDe
+-----END PGP PUBLIC KEY BLOCK-----
+
+Organization: Shlomo Software Solutions LLC
+Contact: security@shlomo.us
+Created: 2026-01-01
+Algorithm: RSA-4096
+Fingerprint: ABCD 1234 5678 90EF GHIJ KLMN OPQR STUV WXYZ
+
+This is a demonstration PGP public key placeholder.
+For actual secure communications, please contact: security@shlomo.us

@@ -8,6 +8,10 @@ const siteData = Object.freeze({
     phone: "+1 (862) 403-7724",
     linkedin: "https://linkedin.com/company/shlomo-solutions",
     github: "https://github.com/shlomo-solutions",
+    uptime: "99.99%",
+    pgpUrl: "/shlomo-public-key.txt",
+    whatsappNumber: "18624037724",
+    whatsappMessage: "Hello! I'd like to discuss how Shlomo can help with my company's infrastructure needs.",
   }),
 
   navigation: Object.freeze([
@@ -112,8 +116,10 @@ const siteData = Object.freeze({
   cta: Object.freeze({
     title: "Ready to scale without interruptions?",
     description: "Discover how companies like yours have migrated to the cloud without stopping work.",
-    button: "Schedule Consultation",
+    button: "Secure Contact",
     email: "hello@shlomo.us",
+    whatsappNumber: "18624037724",
+    whatsappMessage: "Hello! I'd like to discuss how Shlomo can help with my company's infrastructure needs.",
   }),
 
   footer: Object.freeze({
