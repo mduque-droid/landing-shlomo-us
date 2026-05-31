@@ -8,10 +8,12 @@ import Features from './components/sections/Features';
 import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
 import LegalModal from './components/atomic/LegalModal';
+import MigrationModal from './components/atomic/MigrationModal';
 import ContactFormModal from './components/sections/ContactFormModal';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
+  const [showMigrationModal, setShowMigrationModal] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const handleHeroClick = () => {
@@ -69,7 +71,7 @@ function App() {
         onPrimaryClick={handleHeroClick}
         onSecondaryClick={handlePortfolioClick}
       />
-      <Services data={siteData} />
+      <Services data={siteData} onShowMigrationModal={() => setShowMigrationModal(true)} />
       <Portfolio data={siteData} />
       <Features data={siteData} />
       <CTA data={siteData.cta} onContactClick={handleOpenContactForm} />
@@ -77,7 +79,7 @@ function App() {
         company={siteData.company}
         footer={siteData.footer}
         onLegalLinkClick={handleOpenLegalModal}
-        onContactClick={handleOpenContactForm}
+        ctaData={siteData.cta}
       />
 
       {modalContent && (
@@ -92,8 +94,13 @@ function App() {
       <ContactFormModal
         isOpen={isContactFormOpen}
         onClose={handleCloseContactForm}
-        pgpUrl={siteData.company.pgpUrl}
+        pgpUrl="/.well-known/pgp-public-key.asc"
         company={siteData.company}
+      />
+
+      <MigrationModal
+        isOpen={showMigrationModal}
+        onClose={() => setShowMigrationModal(false)}
       />
     </div>
   );
