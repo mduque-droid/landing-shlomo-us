@@ -1,122 +1,84 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import siteData from './constants/siteData';
+import Header from './components/layout/Header';
+import Hero from './components/sections/Hero';
+import Services from './components/sections/Services';
+import Portfolio from './components/sections/Portfolio';
+import Features from './components/sections/Features';
+import CTA from './components/sections/CTA';
+import Footer from './components/sections/Footer';
+import LegalModal from './components/atomic/LegalModal';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeModal, setActiveModal] = useState(null);
+
+  const handleHeroClick = () => {
+    const ctaSection = document.querySelector('#cta');
+    if (ctaSection) {
+      ctaSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handlePortfolioClick = () => {
+    const portfolioSection = document.querySelector('#portfolio');
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleHeaderCTA = () => {
+    const ctaSection = document.querySelector('#cta');
+    if (ctaSection) {
+      ctaSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleOpenLegalModal = (type) => {
+    setActiveModal(type);
+  };
+
+  const handleCloseLegalModal = () => {
+    setActiveModal(null);
+  };
+
+  const modalContent = activeModal === 'privacy'
+    ? siteData.legal.privacy
+    : activeModal === 'terms'
+    ? siteData.legal.terms
+    : null;
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="bg-slate-50">
+      <Header
+        company={siteData.company}
+        navigation={siteData.navigation}
+        onCTAClick={handleHeaderCTA}
+      />
+      <Hero
+        data={siteData.hero}
+        onPrimaryClick={handleHeroClick}
+        onSecondaryClick={handlePortfolioClick}
+      />
+      <Services data={siteData} />
+      <Portfolio data={siteData} />
+      <Features data={siteData} />
+      <CTA data={siteData.cta} />
+      <Footer
+        company={siteData.company}
+        footer={siteData.footer}
+        onLegalLinkClick={handleOpenLegalModal}
+      />
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {modalContent && (
+        <LegalModal
+          isOpen={activeModal !== null}
+          onClose={handleCloseLegalModal}
+          title={modalContent.title}
+          content={modalContent.content}
+        />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
