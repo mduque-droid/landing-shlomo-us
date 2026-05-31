@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import siteData from './constants/siteData';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
@@ -6,8 +7,11 @@ import Portfolio from './components/sections/Portfolio';
 import Features from './components/sections/Features';
 import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
+import LegalModal from './components/atomic/LegalModal';
 
 function App() {
+  const [activeModal, setActiveModal] = useState(null);
+
   const handleHeroClick = () => {
     const ctaSection = document.querySelector('#cta');
     if (ctaSection) {
@@ -29,6 +33,20 @@ function App() {
     }
   };
 
+  const handleOpenLegalModal = (type) => {
+    setActiveModal(type);
+  };
+
+  const handleCloseLegalModal = () => {
+    setActiveModal(null);
+  };
+
+  const modalContent = activeModal === 'privacy'
+    ? siteData.legal.privacy
+    : activeModal === 'terms'
+    ? siteData.legal.terms
+    : null;
+
   return (
     <div className="bg-slate-50">
       <Header
@@ -45,7 +63,20 @@ function App() {
       <Portfolio data={siteData} />
       <Features data={siteData} />
       <CTA data={siteData.cta} />
-      <Footer company={siteData.company} footer={siteData.footer} />
+      <Footer
+        company={siteData.company}
+        footer={siteData.footer}
+        onLegalLinkClick={handleOpenLegalModal}
+      />
+
+      {modalContent && (
+        <LegalModal
+          isOpen={activeModal !== null}
+          onClose={handleCloseLegalModal}
+          title={modalContent.title}
+          content={modalContent.content}
+        />
+      )}
     </div>
   );
 }

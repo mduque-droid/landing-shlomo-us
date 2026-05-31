@@ -120,9 +120,20 @@ const siteData = Object.freeze({
     copyright: "Shlomo Software Solutions LLC",
     year: new Date().getFullYear(),
     links: [
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
+      { label: "Privacy", href: "privacy" },
+      { label: "Terms", href: "terms" },
     ],
+  }),
+
+  legal: Object.freeze({
+    privacy: Object.freeze({
+      title: "Privacy Policy",
+      content: "At Shlomo Software Solutions LLC, we value your privacy. This Privacy Policy governs our data collection practices. We only collect basic contact information (such as name and email) voluntarily provided by users through our contact forms. We do not sell, rent, or lease our customer lists to third parties. All data is processed securely to fulfill service requests and comply with applicable U.S. state and federal regulations. For questions about our privacy practices, please contact us at hello@shlomo.us.",
+    }),
+    terms: Object.freeze({
+      title: "Terms of Service",
+      content: "Welcome to Shlomo Software Solutions LLC. By accessing this website, you agree to comply with these Terms of Service. All content, code, architectures, and intellectual property displayed on this site are the exclusive property of Shlomo Software Solutions LLC and are protected by applicable copyright and trademark laws. Our services are provided 'as is' without warranties of any kind. Any legal disputes arising from the use of this site will be governed by the laws of the United States. Users agree not to reverse-engineer, decompile, or attempt to extract source code from our proprietary solutions.",
+    }),
   }),
 });
 

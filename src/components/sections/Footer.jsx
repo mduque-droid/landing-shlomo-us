@@ -2,7 +2,7 @@ import Container from '../layout/Container';
 import Icon from '../atomic/Icon';
 import logo from '../../assets/shlomo-logo.png';
 
-const Footer = ({ company, footer }) => {
+const Footer = ({ company, footer, onLegalLinkClick }) => {
   return (
     <footer className="bg-slate-900 text-gray-300 py-12">
       <Container>
@@ -44,9 +44,12 @@ const Footer = ({ company, footer }) => {
             <ul className="space-y-2 text-sm">
               {footer.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="hover:text-cyan-600 transition-colors">
+                  <button
+                    onClick={() => onLegalLinkClick(link.href)}
+                    className="hover:text-cyan-600 transition-colors text-left cursor-pointer"
+                  >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
