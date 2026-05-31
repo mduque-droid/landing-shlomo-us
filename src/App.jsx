@@ -8,9 +8,11 @@ import Features from './components/sections/Features';
 import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
 import LegalModal from './components/atomic/LegalModal';
+import ContactFormModal from './components/sections/ContactFormModal';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const handleHeroClick = () => {
     const ctaSection = document.querySelector('#cta');
@@ -41,6 +43,14 @@ function App() {
     setActiveModal(null);
   };
 
+  const handleOpenContactForm = () => {
+    setIsContactFormOpen(true);
+  };
+
+  const handleCloseContactForm = () => {
+    setIsContactFormOpen(false);
+  };
+
   const modalContent = activeModal === 'privacy'
     ? siteData.legal.privacy
     : activeModal === 'terms'
@@ -62,11 +72,12 @@ function App() {
       <Services data={siteData} />
       <Portfolio data={siteData} />
       <Features data={siteData} />
-      <CTA data={siteData.cta} />
+      <CTA data={siteData.cta} onContactClick={handleOpenContactForm} />
       <Footer
         company={siteData.company}
         footer={siteData.footer}
         onLegalLinkClick={handleOpenLegalModal}
+        onContactClick={handleOpenContactForm}
       />
 
       {modalContent && (
@@ -77,6 +88,13 @@ function App() {
           content={modalContent.content}
         />
       )}
+
+      <ContactFormModal
+        isOpen={isContactFormOpen}
+        onClose={handleCloseContactForm}
+        pgpUrl={siteData.company.pgpUrl}
+        company={siteData.company}
+      />
     </div>
   );
 }
