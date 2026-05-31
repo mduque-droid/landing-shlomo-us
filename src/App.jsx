@@ -8,9 +8,11 @@ import Features from './components/sections/Features';
 import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
 import LegalModal from './components/atomic/LegalModal';
+import MigrationModal from './components/atomic/MigrationModal';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
+  const [showMigrationModal, setShowMigrationModal] = useState(false);
 
   const handleHeroClick = () => {
     const ctaSection = document.querySelector('#cta');
@@ -59,7 +61,7 @@ function App() {
         onPrimaryClick={handleHeroClick}
         onSecondaryClick={handlePortfolioClick}
       />
-      <Services data={siteData} />
+      <Services data={siteData} onShowMigrationModal={() => setShowMigrationModal(true)} />
       <Portfolio data={siteData} />
       <Features data={siteData} />
       <CTA data={siteData.cta} />
@@ -77,6 +79,11 @@ function App() {
           content={modalContent.content}
         />
       )}
+
+      <MigrationModal
+        isOpen={showMigrationModal}
+        onClose={() => setShowMigrationModal(false)}
+      />
     </div>
   );
 }
