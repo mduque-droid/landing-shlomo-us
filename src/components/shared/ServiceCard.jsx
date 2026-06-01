@@ -23,8 +23,6 @@ const ServiceCard = ({ service, onShowModal }) => {
       <p className="text-gray-700 text-sm font-semibold mb-2">The Problem:</p>
       <p className="text-gray-600 text-sm mb-4 italic">{service.pain}</p>
 
-      <p className="text-gray-600 text-sm flex-grow mb-4">{service.description}</p>
-
       <div className="mt-auto pt-4 border-t border-gray-100">
         <p className="text-sm font-semibold text-cyan-600 mb-3">
           ✓ {service.benefit}
