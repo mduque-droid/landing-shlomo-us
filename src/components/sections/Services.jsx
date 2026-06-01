@@ -1,7 +1,7 @@
 import Container from '../layout/Container';
 import ServiceCard from '../shared/ServiceCard';
 
-const Services = ({ data, onShowMigrationModal }) => {
+const Services = ({ data, onShowServiceModal }) => {
   return (
     <section id="services" className="py-20 sm:py-32 bg-white">
       <Container>
@@ -18,7 +18,7 @@ const Services = ({ data, onShowMigrationModal }) => {
             <ServiceCard
               key={service.id}
               service={service}
-              onShowModal={service.hasModal ? onShowMigrationModal : null}
+              onShowModal={onShowServiceModal}
             />
           ))}
         </div>

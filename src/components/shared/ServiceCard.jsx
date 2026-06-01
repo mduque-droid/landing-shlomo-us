@@ -7,6 +7,12 @@ import Icon from '../atomic/Icon';
 const ServiceCard = ({ service, onShowModal }) => {
   const { ref, isInView } = useScrollAnimation();
 
+  const handleShowModal = () => {
+    if (onShowModal) {
+      onShowModal(service.id);
+    }
+  };
+
   return (
     <motion.div
       ref={ref}
@@ -28,9 +34,9 @@ const ServiceCard = ({ service, onShowModal }) => {
           ✓ {service.benefit}
         </p>
 
-        {onShowModal && (
+        {service.hasModal && (
           <button
-            onClick={onShowModal}
+            onClick={handleShowModal}
             className="w-full px-3 py-2 bg-cyan-100 text-cyan-700 hover:bg-cyan-200 rounded-lg text-sm font-medium transition-colors"
           >
             See How It Works
