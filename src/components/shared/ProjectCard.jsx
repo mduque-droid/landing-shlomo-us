@@ -1,8 +1,11 @@
+import { motion } from 'framer-motion';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import Card from '../atomic/Card';
 import Badge from '../atomic/Badge';
 import Icon from '../atomic/Icon';
 
 const ProjectCard = ({ project }) => {
+  const { ref, isInView } = useScrollAnimation();
   const categoryColors = {
     migration: 'teal',
     compliance: 'amber',
@@ -12,7 +15,13 @@ const ProjectCard = ({ project }) => {
   const color = categoryColors[project.category] || 'slate';
 
   return (
-    <Card className="h-full flex flex-col">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
+      <Card className="h-full flex flex-col">
       <div className="flex items-center gap-2 mb-3">
         <Icon name={project.icon} size={24} className="text-slate-600" />
         <Badge color={color}>{project.category}</Badge>
@@ -26,7 +35,8 @@ const ProjectCard = ({ project }) => {
           </Badge>
         ))}
       </div>
-    </Card>
+      </Card>
+    </motion.div>
   );
 };
 

@@ -1,9 +1,26 @@
-const MigrationModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+import { AnimatePresence, motion } from 'framer-motion';
+import AnimatedCounter from './AnimatedCounter';
 
+const MigrationModal = ({ isOpen, onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4">
-      <div className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={onClose}
+            className="fixed inset-0 z-50 bg-black bg-opacity-60"
+          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -121,47 +138,46 @@ const MigrationModal = ({ isOpen, onClose }) => {
 
           {/* Steps */}
           <div className="grid md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                <h4 className="font-bold text-slate-900">Step 1</h4>
-              </div>
-              <p className="text-sm text-gray-600">
-                Old server handles all traffic normally
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                <h4 className="font-bold text-slate-900">Step 2</h4>
-              </div>
-              <p className="text-sm text-gray-600">
-                New server syncs data in real-time
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <h4 className="font-bold text-slate-900">Step 3</h4>
-              </div>
-              <p className="text-sm text-gray-600">
-                Switch traffic. Zero disruption.
-              </p>
-            </div>
+            {[
+              { num: 1, color: 'red', text: 'Old server handles all traffic normally' },
+              { num: 2, color: 'amber', text: 'New server syncs data in real-time' },
+              { num: 3, color: 'green', text: 'Switch traffic. Zero disruption.' },
+            ].map((step, idx) => (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.1 }}
+                className="bg-gray-50 rounded-lg p-4 border border-gray-200"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <div className={`w-2 h-2 bg-${step.color}-500 rounded-full`}></div>
+                  <h4 className="font-bold text-slate-900">Step {step.num}</h4>
+                </div>
+                <p className="text-sm text-gray-600">{step.text}</p>
+              </motion.div>
+            ))}
           </div>
 
           {/* Results */}
-          <div className="bg-cyan-50 rounded-lg p-6 border border-cyan-200">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-cyan-50 rounded-lg p-6 border border-cyan-200"
+          >
             <h3 className="font-bold text-slate-900 mb-4">The Results</h3>
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <p className="text-3xl font-bold text-cyan-600">0 min</p>
+                <p className="text-3xl font-bold text-cyan-600">
+                  <AnimatedCounter end={0} suffix=" min" />
+                </p>
                 <p className="text-sm text-gray-600">Downtime</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-green-600">100%</p>
+                <p className="text-3xl font-bold text-green-600">
+                  <AnimatedCounter end={100} suffix="%" />
+                </p>
                 <p className="text-sm text-gray-600">Data integrity</p>
               </div>
               <div>
@@ -169,7 +185,7 @@ const MigrationModal = ({ isOpen, onClose }) => {
                 <p className="text-sm text-gray-600">Business as usual</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA */}
           <div className="mt-8 text-center">
@@ -181,8 +197,11 @@ const MigrationModal = ({ isOpen, onClose }) => {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 
