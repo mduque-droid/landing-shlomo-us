@@ -1,10 +1,20 @@
+import { motion } from 'framer-motion';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import Card from '../atomic/Card';
 import Badge from '../atomic/Badge';
 import Icon from '../atomic/Icon';
 
 const ServiceCard = ({ service, onShowModal }) => {
+  const { ref, isInView } = useScrollAnimation();
+
   return (
-    <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
+      <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
       <div className="flex items-center gap-2 mb-4">
         <Icon name={service.icon} size={24} className={`text-${service.color}-600`} />
       </div>
@@ -29,7 +39,8 @@ const ServiceCard = ({ service, onShowModal }) => {
           </button>
         )}
       </div>
-    </Card>
+      </Card>
+    </motion.div>
   );
 };
 

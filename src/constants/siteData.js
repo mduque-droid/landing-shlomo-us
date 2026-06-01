@@ -56,6 +56,9 @@ const siteData = Object.freeze({
       longDescription: "We move your entire infrastructure to the cloud while your users work unaware. Dual-write strategy, automatic failover, and guaranteed rollback.",
       icon: "arrow-right-circle",
       color: "teal",
+      hasModal: true,
+      pain: "Invisible migration of databases and legacy systems. Your clients continue operating seamlessly.",
+      benefit: "Move your entire infrastructure to the cloud without downtime",
     },
   ]),
 
