@@ -40,6 +40,9 @@ const siteData = Object.freeze({
       longDescription: "We create bespoke software solutions that evolve with your business. Our architectures are designed to be maintainable, scalable, and resilient.",
       icon: "code-brackets",
       color: "cyan",
+      hasModal: true,
+      pain: "Monolithic code, technical debt, and architecture that can't scale with your business.",
+      benefit: "Maintainable, scalable code that evolves with your growth",
     },
     {
       id: "compliance",
@@ -48,6 +51,9 @@ const siteData = Object.freeze({
       longDescription: "We open doors to government contracts. We audit, certify, and adapt your tech stack to NIST, FedRAMP, HIPAA, and state compliance standards.",
       icon: "shield-check",
       color: "amber",
+      hasModal: true,
+      pain: "Non-compliant infrastructure blocking access to lucrative government contracts.",
+      benefit: "Certifications + GovTech market access",
     },
     {
       id: "zero-downtime",

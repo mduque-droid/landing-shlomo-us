@@ -9,11 +9,13 @@ import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
 import LegalModal from './components/atomic/LegalModal';
 import MigrationModal from './components/atomic/MigrationModal';
+import EngineeringModal from './components/atomic/EngineeringModal';
+import ComplianceModal from './components/atomic/ComplianceModal';
 import ContactFormModal from './components/sections/ContactFormModal';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
-  const [showMigrationModal, setShowMigrationModal] = useState(false);
+  const [activeServiceModal, setActiveServiceModal] = useState(null);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const handleHeroClick = () => {
@@ -53,6 +55,14 @@ function App() {
     setIsContactFormOpen(false);
   };
 
+  const handleOpenServiceModal = (serviceId) => {
+    setActiveServiceModal(serviceId);
+  };
+
+  const handleCloseServiceModal = () => {
+    setActiveServiceModal(null);
+  };
+
   const modalContent = activeModal === 'privacy'
     ? siteData.legal.privacy
     : activeModal === 'terms'
@@ -71,7 +81,7 @@ function App() {
         onPrimaryClick={handleHeroClick}
         onSecondaryClick={handlePortfolioClick}
       />
-      <Services data={siteData} onShowMigrationModal={() => setShowMigrationModal(true)} />
+      <Services data={siteData} onShowServiceModal={handleOpenServiceModal} />
       <Portfolio data={siteData} />
       <Features data={siteData} />
       <CTA data={siteData.cta} onContactClick={handleOpenContactForm} />
@@ -98,9 +108,19 @@ function App() {
         company={siteData.company}
       />
 
+      <EngineeringModal
+        isOpen={activeServiceModal === 'custom-engineering'}
+        onClose={handleCloseServiceModal}
+      />
+
+      <ComplianceModal
+        isOpen={activeServiceModal === 'compliance'}
+        onClose={handleCloseServiceModal}
+      />
+
       <MigrationModal
-        isOpen={showMigrationModal}
-        onClose={() => setShowMigrationModal(false)}
+        isOpen={activeServiceModal === 'zero-downtime'}
+        onClose={handleCloseServiceModal}
       />
     </div>
   );
