@@ -17,7 +17,7 @@ const siteData = Object.freeze({
   navigation: Object.freeze([
     { label: "Services", href: "#services" },
     { label: "Portfolio", href: "#portfolio" },
-    { label: "Why Shlomo", href: "#features" },
+    { label: "Why Shlomo?", href: "#features" },
     { label: "Contact", href: "#cta" },
   ]),
 

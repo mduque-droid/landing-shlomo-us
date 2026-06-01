@@ -44,7 +44,7 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
               </li>
               <li>
                 <a href="#features" className={linkClasses}>
-                  Why Shlomo
+                  Why Shlomo?
                 </a>
               </li>
             </ul>
