@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Environment variables — never commit real values
+.env
+.env.local
+
+# PGP private key — never commit this
+shlomo-private-key.asc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
