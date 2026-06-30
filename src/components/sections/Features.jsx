@@ -10,10 +10,10 @@ const Features = ({ data }) => {
             Why Shlomo?
           </h2>
           <p className="text-xl text-gray-600">
-            Our differentiators. What makes us unique in the market?
+            The technical commitments behind every engagement.
           </p>
         </div>
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {data.features.map((feature) => (
             <FeatureBlock key={feature.id} feature={feature} />
           ))}

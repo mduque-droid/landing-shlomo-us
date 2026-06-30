@@ -89,7 +89,7 @@ function App() {
         company={siteData.company}
         footer={siteData.footer}
         onLegalLinkClick={handleOpenLegalModal}
-        ctaData={siteData.cta}
+        onContactClick={handleOpenContactForm}
       />
 
       {modalContent && (
@@ -104,7 +104,7 @@ function App() {
       <ContactFormModal
         isOpen={isContactFormOpen}
         onClose={handleCloseContactForm}
-        pgpUrl="/.well-known/pgp-public-key.asc"
+        pgpUrl={siteData.company.pgpUrl}
         company={siteData.company}
       />
 

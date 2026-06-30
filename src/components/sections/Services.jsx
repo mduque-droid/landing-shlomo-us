@@ -7,13 +7,13 @@ const Services = ({ data, onShowServiceModal }) => {
       <Container>
         <div className="max-w-2xl mx-auto text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            What We Build
+            What We Engineer
           </h2>
           <p className="text-xl text-gray-600">
-            Software that sells. Websites that convert. Infrastructure that never fails.
+            Event-driven architectures, live migrations, and federal compliance — built by practitioners who've executed it at scale.
           </p>
         </div>
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {data.services.map((service) => (
             <ServiceCard
               key={service.id}
