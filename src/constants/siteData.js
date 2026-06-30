@@ -8,7 +8,7 @@ const siteData = Object.freeze({
     phone: "+1 (862) 403-7724",
     linkedin: "https://linkedin.com/company/shlomo-solutions",
     github: "https://github.com/shlomo-solutions",
-    pgpUrl: "/.well-known/pgp-public-key.asc",
+    pgpUrl: "/shlomo-public-key.txt",
     whatsappNumber: "18624037724",
     whatsappMessage: "Hi, I'd like to discuss an infrastructure engineering challenge with Shlomo. Our main bottleneck is:",
   }),
