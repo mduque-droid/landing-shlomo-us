@@ -14,7 +14,7 @@ const Header = ({ company, navigation, onCTAClick }) => {
         <Navigation items={navigation} />
         <div className="flex items-center gap-3">
           <span className="hidden sm:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
-            🇺🇸 USA-Based
+            🇺🇸
           </span>
           <Button size="sm" onClick={onCTAClick}>
             Contact
