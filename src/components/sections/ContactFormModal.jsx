@@ -39,12 +39,13 @@ const ContactFormModal = ({ isOpen, onClose, pgpUrl, company }) => {
         }),
       });
 
+      const result = await submitResponse.json();
       if (submitResponse.ok) {
         setStatus({ type: 'success', message: 'Message sent securely. We\'ll respond shortly.' });
         setFormData({ name: '', email: '', message: '' });
         setTimeout(onClose, 2000);
       } else {
-        setStatus({ type: 'error', message: 'Failed to send. Please try again.' });
+        setStatus({ type: 'error', message: result.error || 'Failed to send. Please try again.' });
       }
     } catch (error) {
       setStatus({ type: 'error', message: 'Error: ' + error.message });
