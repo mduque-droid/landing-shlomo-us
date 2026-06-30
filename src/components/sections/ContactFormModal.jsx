@@ -17,11 +17,12 @@ const ContactFormModal = ({ isOpen, onClose, pgpUrl, company }) => {
     setStatus(null);
 
     try {
-      // Fetch PGP public key
       const response = await fetch(pgpUrl);
+      if (!response.ok) {
+        throw new Error(`Could not load encryption key (HTTP ${response.status}). Please contact us directly at hello@shlomo.us.`);
+      }
       const publicKeyArmored = await response.text();
 
-      // Encrypt form data
       const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
       const encrypted = await openpgp.encrypt({
         message: await openpgp.createMessage({ text: JSON.stringify(formData) }),
