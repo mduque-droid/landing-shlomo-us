@@ -13,18 +13,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  try {
-    await resend.emails.send({
-      from: 'Shlomo Contact <contact@shlomo.us>',
-      to: 'hello@shlomo.us',
-      replyTo: senderEmail,
-      subject: `[Secure Contact] New encrypted message from ${senderEmail}`,
-      text: encryptedData,
-    });
+  const { data, error } = await resend.emails.send({
+    from: 'Shlomo Contact <contact@shlomo.us>',
+    to: 'hello@shlomo.us',
+    replyTo: senderEmail,
+    subject: `[Secure Contact] New encrypted message from ${senderEmail}`,
+    text: encryptedData,
+  });
 
-    return res.status(200).json({ success: true });
-  } catch (error) {
-    console.error('Resend error:', error);
-    return res.status(500).json({ error: 'Failed to send message. Please try again.' });
+  if (error) {
+    console.error('Resend error:', JSON.stringify(error));
+    return res.status(500).json({ error: error.message, detail: error });
   }
+
+  return res.status(200).json({ success: true, id: data.id });
 }
