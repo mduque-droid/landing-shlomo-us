@@ -3,13 +3,6 @@ import Icon from '../atomic/Icon';
 import logo from '../../assets/shlomo-logo.png';
 import wppIcon from '../../assets/wpp-icon.png';
 
-const UptimeBadge = ({ uptime }) => (
-  <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-950 border border-emerald-900 rounded-full w-fit">
-    <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse" aria-hidden="true"></span>
-    <span className="text-xs font-semibold text-emerald-400">Systems: {uptime} Operational</span>
-  </div>
-);
-
 const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
   const linkClasses = 'hover:text-cyan-400 transition-colors duration-200';
 
@@ -25,7 +18,6 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
               <span className="font-bold text-white text-sm">{company.name}</span>
             </div>
             <p className="text-sm text-gray-400 mb-6 leading-relaxed">{company.tagline}</p>
-            <UptimeBadge uptime={company.uptime} />
           </div>
 
           {/* Company */}
@@ -82,12 +74,12 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
                 </a>
               </li>
               <li>
-                <a
-                  href={`mailto:${company.email}`}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold rounded-lg transition-colors duration-200 text-sm inline-block"
+                <button
+                  onClick={onContactClick}
+                  className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold rounded-lg transition-colors duration-200 text-sm inline-block cursor-pointer"
                 >
                   Secure Contact
-                </a>
+                </button>
               </li>
               <li className="flex gap-4 mt-6 pt-3 border-t border-slate-800">
                 <a
