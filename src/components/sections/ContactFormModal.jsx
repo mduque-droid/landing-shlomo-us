@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as openpgp from 'openpgp';
 
-const ContactFormModal = ({ isOpen, onClose, pgpUrl, company }) => {
+const ContactFormModal = ({ isOpen, onClose, pgpUrl }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);

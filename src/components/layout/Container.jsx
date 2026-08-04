@@ -1,9 +1,16 @@
-const Container = ({ children, className = '' }) => {
+import { forwardRef } from 'react';
+
+const Container = forwardRef(({ children, className = '' }, ref) => {
   return (
-    <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    <div
+      ref={ref}
+      className={`max-w-6xl mx-auto px-6 lg:px-8 ${className}`}
+    >
       {children}
     </div>
   );
-};
+});
+
+Container.displayName = 'Container';
 
 export default Container;

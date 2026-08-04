@@ -3,19 +3,32 @@ import Navigation from './Navigation';
 import Button from '../atomic/Button';
 import logo from '../../assets/shlomo-logo.png';
 
-const Header = ({ company, navigation, onCTAClick }) => {
+const Header = ({ navigation, onCTAClick }) => {
+  const handleHome = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-slate-50 border-b border-gray-200">
-      <Container className="py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="Shlomo Logo" className="h-10 w-auto" />
-          <span className="font-bold text-slate-900 hidden sm:block text-sm">{company.name}</span>
-        </div>
-        <Navigation items={navigation} />
-        <div className="flex items-center gap-3">
-          <span className="hidden sm:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
-            🇺🇸
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
+      <Container className="flex h-16 items-center justify-between">
+        <a href="#" onClick={handleHome} className="flex items-center gap-2.5">
+          <img src={logo} alt="Shlomo" className="h-7 w-auto" />
+          <span className="text-[15px] font-semibold tracking-[-0.01em] text-ink">
+            Shlomo
           </span>
+        </a>
+
+        <Navigation items={navigation} />
+
+        <div className="flex items-center gap-5">
+          <a
+            href="#cta"
+            onClick={onCTAClick}
+            className="hidden sm:inline text-sm text-muted hover:text-ink transition-colors duration-300"
+          >
+            hello@shlomo.us
+          </a>
           <Button size="sm" onClick={onCTAClick}>
             Contact
           </Button>

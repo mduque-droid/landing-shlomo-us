@@ -1,14 +1,13 @@
-const Badge = ({ children, color = 'cyan', className = '' }) => {
-  const colorStyles = {
-    cyan: 'bg-cyan-100 text-cyan-700',
-    amber: 'bg-amber-100 text-amber-700',
-    teal: 'bg-teal-100 text-teal-700',
-    slate: 'bg-slate-100 text-slate-700',
-    green: 'bg-green-100 text-green-700',
-  };
-
+/**
+ * A single restrained chip — hairline border, muted micro-label.
+ * Keeps the `color` prop for API compatibility, but the design system
+ * intentionally renders one neutral style (no rainbow of colors).
+ */
+const Badge = ({ children, className = '' }) => {
   return (
-    <span className={`inline-block px-3 py-1 rounded text-xs font-semibold ${colorStyles[color]} ${className}`}>
+    <span
+      className={`inline-flex items-center rounded-full border border-line px-2.5 py-1 text-[11px] font-medium tracking-wide text-muted ${className}`}
+    >
       {children}
     </span>
   );

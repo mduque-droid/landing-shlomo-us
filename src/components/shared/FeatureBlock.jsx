@@ -1,23 +1,22 @@
-import { motion } from 'framer-motion';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import Icon from '../atomic/Icon';
+import { useReveal } from '../../hooks/useReveal';
 
-const FeatureBlock = ({ feature }) => {
-  const { ref, isInView } = useScrollAnimation();
+const FeatureBlock = ({ feature, index = 0 }) => {
+  const { ref, visible } = useReveal();
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="text-center">
-      <div className="flex justify-center mb-4">
-        <Icon name={feature.icon} size={32} className="text-cyan-600" />
-      </div>
-      <h3 className="text-lg font-bold text-slate-900 mb-2">{feature.title}</h3>
-      <p className="text-gray-600 text-sm">{feature.description}</p>
-      </motion.div>
+      className={`reveal ${visible ? 'is-visible' : ''} border-t border-line pt-6`}
+      style={{ transitionDelay: `${index * 90}ms` }}
+    >
+      <span className="font-mono text-xs tracking-widest text-faint">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <h3 className="mt-4 text-base font-semibold text-ink">{feature.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted">
+        {feature.description}
+      </p>
+    </div>
   );
 };
 
