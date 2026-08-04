@@ -2,7 +2,7 @@ const siteData = Object.freeze({
   company: Object.freeze({
     name: "Shlomo Software Solutions LLC",
     tagline: "Distributed Systems Engineering. Zero Operational Risk.",
-    mission: "We are the engineering team CTOs and VPEs call when the architecture is at its breaking point. Three senior engineers — deep in distributed systems, data infrastructure, and federal compliance — embedded directly in your team without the overhead of a large consultancy.",
+    mission: "We are the engineering team CTOs and VPEs call when the architecture is at its breaking point. A specialized team — deep in distributed systems, data infrastructure, and federal compliance — embedded directly with you, without the overhead of a large consultancy.",
     description: "We execute complex infrastructure migrations and system redesigns without interrupting your business. No downtime. No data loss. No surprises.",
     email: "hello@shlomo.us",
     phone: "+1 (862) 403-7724",
@@ -21,14 +21,19 @@ const siteData = Object.freeze({
   ]),
 
   hero: Object.freeze({
-    badge: "3 Senior Engineers. Zero Bureaucracy.",
+    badge: "A dedicated engineering team. Zero bureaucracy.",
     title: "The infrastructure",
     titleHighlight: "you cannot afford to get wrong.",
-    subtitle: "40TB migrated to cloud-native without downtime. 2,500 TPS fintech backends under 45ms P99. $200K in production losses prevented in 72 hours. This is what Staff-level engineering looks like.",
+    subtitle: "A specialized engineering team that redesigns, migrates, and hardens critical systems — without downtime, data loss, or surprises.",
     cta: {
-      primary: "Start the Engineering Conversation",
-      secondary: "View Portfolio",
+      primary: "Start a conversation",
+      secondary: "View work",
     },
+    stats: [
+      { value: "40TB", label: "Migrated in production. Zero downtime." },
+      { value: "2,500 TPS", label: "Fintech backend at sub-45ms P99." },
+      { value: "SOC2 · HIPAA", label: "Audits cleared. NIST 800-53 aligned." },
+    ],
   }),
 
   services: Object.freeze([
@@ -123,7 +128,7 @@ const siteData = Object.freeze({
 
   cta: Object.freeze({
     title: "Your architecture is either an asset or a liability.",
-    description: "Three senior engineers — no project managers, no account executives, no junior handoffs. Direct access to the team that designs, builds, and operates your infrastructure.",
+    description: "A dedicated engineering team — no project managers, no account executives, no junior handoffs. Direct access to the people who design, build, and operate your infrastructure.",
     button: "Start the Engineering Conversation",
     email: "hello@shlomo.us",
     whatsappNumber: "18624037724",

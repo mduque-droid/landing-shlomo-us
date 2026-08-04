@@ -1,50 +1,50 @@
-import { motion } from 'framer-motion';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import Card from '../atomic/Card';
-import Badge from '../atomic/Badge';
-import Icon from '../atomic/Icon';
+import { useReveal } from '../../hooks/useReveal';
 
-const ServiceCard = ({ service, onShowModal }) => {
-  const { ref, isInView } = useScrollAnimation();
+const ServiceCard = ({ service, index = 0, onShowModal }) => {
+  const { ref, visible } = useReveal();
 
   const handleShowModal = () => {
-    if (onShowModal) {
-      onShowModal(service.id);
-    }
+    if (onShowModal) onShowModal(service.id);
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`reveal ${visible ? 'is-visible' : ''} h-full`}
+      style={{ transitionDelay: `${index * 90}ms` }}
     >
-      <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
-      <div className="flex items-center gap-2 mb-4">
-        <Icon name={service.icon} size={24} className={`text-${service.color}-600`} />
-      </div>
-      <h3 className="text-lg font-bold text-slate-900 mb-3">{service.title}</h3>
+      <Card className="flex h-full flex-col">
+        <span className="font-mono text-xs tracking-widest text-faint">
+          {String(index + 1).padStart(2, '0')}
+        </span>
 
-      <p className="text-gray-700 text-sm font-semibold mb-2">The Problem:</p>
-      <p className="text-gray-600 text-sm mb-4 italic">{service.pain}</p>
+        <h3 className="mt-5 text-lg font-semibold tracking-[-0.01em] text-ink">
+          {service.title}
+        </h3>
 
-      <div className="mt-auto pt-4 border-t border-gray-100">
-        <p className="text-sm font-semibold text-cyan-600 mb-3">
-          ✓ {service.benefit}
+        <p className="mt-3 text-sm leading-relaxed text-muted">
+          <span className="font-medium text-ink">The problem — </span>
+          {service.pain}
         </p>
 
-        {service.hasModal && (
-          <button
-            onClick={handleShowModal}
-            className="w-full px-3 py-2 bg-cyan-100 text-cyan-700 hover:bg-cyan-200 rounded-lg text-sm font-medium transition-colors"
-          >
-            See How It Works
-          </button>
-        )}
-      </div>
+        <div className="mt-auto border-t border-line pt-5">
+          <p className="text-sm leading-relaxed text-ink">{service.benefit}</p>
+
+          {service.hasModal && (
+            <button
+              onClick={handleShowModal}
+              className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors duration-300"
+            >
+              See how it works
+              <span className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          )}
+        </div>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 

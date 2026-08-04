@@ -70,7 +70,7 @@ function App() {
     : null;
 
   return (
-    <div className="bg-slate-50">
+    <div className="min-h-screen bg-paper">
       <Header
         company={siteData.company}
         navigation={siteData.navigation}

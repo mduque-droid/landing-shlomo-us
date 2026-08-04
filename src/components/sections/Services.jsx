@@ -3,21 +3,25 @@ import ServiceCard from '../shared/ServiceCard';
 
 const Services = ({ data, onShowServiceModal }) => {
   return (
-    <section id="services" className="py-20 sm:py-32 bg-white">
+    <section id="services" className="border-b border-line bg-paper py-24 sm:py-32">
       <Container>
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            What We Engineer
+        <div className="max-w-2xl">
+          <span className="text-sm font-medium text-accent">Services</span>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
+            What we engineer
           </h2>
-          <p className="text-xl text-gray-600">
-            Event-driven architectures, live migrations, and federal compliance — built by practitioners who've executed it at scale.
+          <p className="mt-4 text-lg leading-relaxed text-muted">
+            Event-driven architectures, live migrations, and federal compliance —
+            built by practitioners who have executed it at scale.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {data.services.map((service) => (
+
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
+          {data.services.map((service, index) => (
             <ServiceCard
               key={service.id}
               service={service}
+              index={index}
               onShowModal={onShowServiceModal}
             />
           ))}

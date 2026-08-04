@@ -3,19 +3,18 @@ import FeatureBlock from '../shared/FeatureBlock';
 
 const Features = ({ data }) => {
   return (
-    <section id="features" className="py-20 sm:py-32 bg-white">
+    <section id="features" className="border-b border-line bg-paper py-24 sm:py-32">
       <Container>
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Why Shlomo?
+        <div className="max-w-2xl">
+          <span className="text-sm font-medium text-accent">Why Shlomo</span>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
+            The commitments behind every engagement
           </h2>
-          <p className="text-xl text-gray-600">
-            The technical commitments behind every engagement.
-          </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {data.features.map((feature) => (
-            <FeatureBlock key={feature.id} feature={feature} />
+
+        <div className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          {data.features.map((feature, index) => (
+            <FeatureBlock key={feature.id} feature={feature} index={index} />
           ))}
         </div>
       </Container>

@@ -14,7 +14,7 @@ const Navigation = ({ items }) => {
           key={item.label}
           href={item.href}
           onClick={(e) => handleSmoothScroll(e, item.href)}
-          className="text-slate-700 hover:text-cyan-600 font-medium transition-colors duration-200"
+          className="text-sm text-muted hover:text-ink transition-colors duration-300"
         >
           {item.label}
         </a>
