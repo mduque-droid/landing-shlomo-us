@@ -258,7 +258,7 @@ export default function MarcoDuquePage() {
             </p>
             <div className="mt-4 flex flex-wrap gap-5">
               <a
-                href="https://shlomo.us"
+                href="https://www.shlomo.us"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-200"
