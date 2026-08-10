@@ -152,7 +152,7 @@ export default function MarcoDuquePage() {
                 Get in touch
               </Button>
               <a
-                href="https://linkedin.com/in/marcoduquelugo"
+                href="https://www.linkedin.com/in/marco-duque-860b45179/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-1.5 text-base font-medium text-ink transition-colors duration-300 hover:text-accent"
