@@ -4,14 +4,15 @@ import Button from '../components/atomic/Button';
 
 const TECH = [
   { label: 'Node.js' }, { label: 'TypeScript' }, { label: 'Java / Spring Boot' },
-  { label: 'Spring WebFlux' }, { label: 'RabbitMQ' }, { label: 'BullMQ' },
-  { label: 'Redis' }, { label: 'Socket.io' }, { label: 'AWS S3' },
-  { label: 'AWS Rekognition' }, { label: 'AWS Comprehend' }, { label: 'AWS Translate' },
+  { label: 'Spring WebFlux' }, { label: 'Event-Driven Architecture' },
+  { label: 'Distributed Systems' }, { label: 'RabbitMQ' }, { label: 'BullMQ' },
+  { label: 'Redis' }, { label: 'Socket.io' }, { label: 'Idempotency' },
+  { label: 'Transactional Integrity' }, { label: 'Fault Tolerance' },
+  { label: 'AWS S3' }, { label: 'AWS Rekognition' }, { label: 'AWS Comprehend' },
   { label: 'AWS MediaConvert' }, { label: 'AWS SES / SNS' }, { label: 'Stripe' },
-  { label: 'MariaDB' }, { label: 'PostgreSQL' }, { label: 'Sequelize-TypeScript' },
-  { label: 'Salesforce' }, { label: 'Docker' }, { label: 'Kubernetes' },
-  { label: 'Jenkins / CI-CD' }, { label: 'Angular' }, { label: 'React' },
-  { label: 'Tailwind CSS' },
+  { label: 'Sequelize-TypeScript' }, { label: 'MariaDB' }, { label: 'PostgreSQL' },
+  { label: 'Salesforce Pipelines' }, { label: 'Docker' }, { label: 'Kubernetes' },
+  { label: 'Jenkins CI/CD' }, { label: 'Angular' }, { label: 'React' },
 ];
 
 const EXPERIENCE = [
@@ -21,34 +22,31 @@ const EXPERIENCE = [
     period: 'Jan 2026 – Present',
     location: 'Queens, NY',
     bullets: [
-      'Design and maintain Salesforce data pipelines consolidating student enrollment, course completion, and license renewal data across 5+ active DOB training programs — reducing reporting time by ~60%.',
-      'Automate compliance reporting workflows using Salesforce Flows and scheduled data jobs, eliminating a recurring 8-hour/week manual operational bottleneck.',
-      'Build and maintain data integrity validations between CRM records and NYC DOB regulatory requirements, ensuring zero compliance gaps across all active licenses.',
-      'Technical lead for all systems and data tooling, bridging engineering decisions with compliance needs in a regulated environment.',
+      'Architect and maintain Salesforce data pipelines consolidating student enrollment, course completion, and regulatory license renewal records across 5+ active NYC DOB compliance programs — reducing reporting latency by ~60%.',
+      'Design automated compliance reporting workflows (Salesforce Flows + scheduled data jobs) with built-in data integrity validations against NYC DOB requirements, eliminating 8 hrs/week of manual reconciliation.',
+      'Enforce referential data integrity and zero-gap compliance across all active licenses as sole technical owner of all systems and data tooling in a regulated environment.',
     ],
   },
   {
-    role: 'Software Engineer — Cloud & Infrastructure',
+    role: 'Software Engineer — Cloud & Distributed Infrastructure',
     company: '7 Safety Training LLC',
     period: 'Apr 2023 – May 2025',
     location: 'Woodside, NY',
     bullets: [
-      'Migrated 6 core services to an AWS microservices architecture, reducing average response time by 35% and increasing uptime from 97% to 99.5%.',
-      'Redesigned Jenkins CI/CD pipelines, cutting average deployment lead time from 3 days to under 4 hours across 4 engineering teams.',
-      'Built automated AWS data pipelines (Lambda + S3 + RDS) processing ~15,000 records daily for downstream reporting and analytics.',
-      'Delivered Power BI dashboards consolidating data from 3 sources, giving leadership real-time visibility into e-commerce KPIs.',
+      'Led migration of 6 monolithic services to a distributed AWS microservices architecture, improving average response time by 35% and raising uptime from 97% to 99.5%.',
+      'Re-architected Jenkins CI/CD pipelines with parallel build stages and automated rollback gates, compressing deployment lead time from 3 days to under 4 hours.',
+      'Built event-driven AWS data pipelines (Lambda + S3 + RDS) processing ~15,000 records/day for downstream compliance reporting and analytics.',
     ],
   },
   {
-    role: 'Full Stack Developer',
+    role: 'Full Stack Developer — Backend Systems',
     company: 'IAS Software',
     period: '2020 – Feb 2023',
     location: 'Medellín, Colombia',
     bullets: [
-      'Engineered non-blocking Java/Spring WebFlux backend services supporting up to 2,000 concurrent users with sub-200ms p95 latency.',
-      'Implemented RabbitMQ event bus across 8 microservices, reducing inter-service coupling and cutting message processing time by 40%.',
-      'Streamlined CI/CD with Jenkins, reducing release cycle from 2 weeks to 3 days.',
-      'Built Angular interfaces for 3 client-facing applications serving 10,000+ monthly active users.',
+      'Engineered reactive Java/Spring WebFlux backend services sustaining 2,000 concurrent sessions at sub-200ms p95 latency under peak load.',
+      'Designed RabbitMQ event bus across 8 microservices achieving eventual consistency, cutting inter-service message processing time by 40%.',
+      'Compressed release cycles from 2 weeks to 3 days via Jenkins + trunk-based Git workflows. Shipped Angular SPAs serving 10,000+ monthly active users.',
     ],
   },
   {
@@ -57,37 +55,37 @@ const EXPERIENCE = [
     period: 'Mar 2017 – Oct 2020',
     location: 'Medellín, Colombia',
     bullets: [
-      'Designed data models and backend services for 4 enterprise applications, reducing query execution time by 50% through schema optimization and indexing.',
-      'Built complex SQL reporting queries cutting manual reporting effort by 70% for business and product teams.',
-      'Developed React Native mobile features shipped to ~3,000 active users.',
+      'Reduced p95 query time by 50% through schema normalization, composite indexing, and query plan analysis across 4 enterprise applications.',
+      'Replaced manual reporting with parameterized SQL pipelines, cutting business reporting effort by 70% and enabling self-serve analytics.',
+      'Shipped React Native mobile features integrated with REST backends to ~3,000 active users.',
     ],
   },
 ];
 
-const SHLOMO_CARDS = [
+const PLATFORM_CARDS = [
   {
-    title: '11 microservices',
-    body: 'API Gateway, Billing, Student, Marketplace, Reports, Utilities, Domain, Packages, Main — each independently deployable via Docker + Webpack.',
+    title: 'Idempotent Event Processing',
+    body: 'All Stripe webhook events processed inside ACID transactions using a ProcessedWebhookEvents deduplication table — exactly-once semantics across charge, refund, and dispute events.',
   },
   {
-    title: 'Async message bus',
-    body: 'RabbitMQ pub/sub across all services. BullMQ + Redis for job queues with async-mutex and p-limit for concurrency control.',
+    title: 'Concurrency Control',
+    body: 'Per-student Mutex locks on video progress updates prevent race conditions under simultaneous HLS segment requests. BullMQ TTL processors auto-grade timed-out evaluations without polling.',
   },
   {
-    title: 'AWS AI/ML pipeline',
-    body: 'Rekognition for student identity verification. Comprehend + Translate for multilingual NLP. MediaConvert for HLS video transcoding.',
+    title: 'Fault Tolerance & Session Integrity',
+    body: 'Heartbeat scheduler (30s) detects and evicts zombie WebSocket sessions. In-memory study session manager syncs state to DB on configurable intervals, surviving disconnects.',
   },
   {
-    title: 'Real-time layer',
-    body: 'Socket.io bidirectional channels for live training sessions, progress sync, and operator notifications.',
+    title: 'AI/ML Identity Pipeline',
+    body: 'AWS Rekognition for real-time face detection and comparison. Comprehend + Translate for multilingual NLP. MediaConvert for HLS transcoding with presigned S3 delivery.',
   },
   {
-    title: 'Full Stripe payments',
-    body: 'Isolated billing microservice with webhook idempotency, payment annulments, and transaction management.',
+    title: 'Immutable Audit Trail',
+    body: 'Validation Snapshot persisted at certificate issuance — captures identity state, effective hours, license config, and document status for regulatory dispute resolution.',
   },
   {
-    title: 'Angular SPA',
-    body: 'ngx-translate i18n, Chart.js dashboards, QR code generation, Socket.io client, and video.js player.',
+    title: 'Event-Driven Microservices',
+    body: '11 independently deployable services communicating over RabbitMQ pub/sub. BullMQ + Redis for distributed job queues with TTL, retries, and concurrency limits.',
   },
 ];
 
@@ -140,10 +138,11 @@ export default function MarcoDuquePage() {
 
           <RevealSection delay={180}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              Senior Software Engineer with 9+ years building distributed systems and data pipelines.
-              Currently designing Salesforce data integrations and compliance automation for a regulated
-              NYC training provider, while independently architecting Shlomo — a full SaaS platform on
-              11 Node.js/TypeScript microservices, AWS AI/ML, and real-time Socket.io.
+              Senior Software Engineer with 9+ years designing high-availability distributed systems
+              and event-driven microservices. Currently building fault-tolerant data pipelines for
+              a regulated NYC compliance environment, while independently architecting an
+              enterprise-grade SaaS platform with idempotent event processing, mutex concurrency
+              control, and an AWS AI/ML identity pipeline.
             </p>
           </RevealSection>
 
@@ -168,7 +167,7 @@ export default function MarcoDuquePage() {
             <dl className="mt-20 grid grid-cols-2 border-t border-line sm:grid-cols-4">
               {[
                 { value: '9+', label: 'Years shipping' },
-                { value: '11', label: 'Microservices built' },
+                { value: '11', label: 'Microservices in prod' },
                 { value: '6', label: 'AWS services integrated' },
                 { value: '4+', label: 'Industries shipped' },
               ].map((stat) => (
@@ -188,7 +187,7 @@ export default function MarcoDuquePage() {
           <RevealSection>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-faint">Core stack</h2>
             <p className="mt-3 text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
-              From runtime to cloud — the full picture.
+              Distributed systems, cloud infrastructure, and beyond.
             </p>
           </RevealSection>
           <RevealSection delay={120}>
@@ -212,14 +211,14 @@ export default function MarcoDuquePage() {
           <RevealSection>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-faint">Experience</h2>
             <p className="mt-3 text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
-              9 years. 4 companies. Two industries.
+              9 years. High-availability systems. Regulated environments.
             </p>
           </RevealSection>
 
           <div className="mt-10 space-y-12">
             {EXPERIENCE.map((job, i) => (
               <RevealSection key={job.company + job.role} delay={i * 80}>
-                <div className="grid gap-6 sm:grid-cols-[200px_1fr]">
+                <div className="grid gap-6 sm:grid-cols-[220px_1fr]">
                   <div>
                     <p className="text-sm font-semibold text-ink">{job.company}</p>
                     <p className="mt-0.5 text-xs text-muted">{job.period}</p>
@@ -244,18 +243,18 @@ export default function MarcoDuquePage() {
         </Container>
       </section>
 
-      {/* ── Project: Shlomo ─────────────────────────────────────── */}
+      {/* ── Platform deep-dive ──────────────────────────────────── */}
       <section className="border-b border-line bg-surface">
         <Container className="py-16 sm:py-20">
           <RevealSection>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-faint">Independent Project</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-faint">Engineering Project</h2>
             <p className="mt-3 text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
-              Shlomo — SaaS for NYC DOB Training Providers.
+              Shlomo — Enterprise-Grade Distributed SaaS Platform.
             </p>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              Built from scratch to solve a problem I know firsthand: managing courses, students,
-              compliance, and payments for NYC DOB training providers. Every layer — architecture,
-              backend, frontend, infrastructure, AI pipeline — designed and shipped solo.
+              Production SaaS for NYC DOB training providers. 11 independently deployable microservices,
+              event-driven architecture, transactional integrity, fault-tolerant session management,
+              and a real-time AWS AI/ML identity pipeline — designed and built solo.
             </p>
             <div className="mt-4 flex flex-wrap gap-5">
               <a
@@ -272,14 +271,14 @@ export default function MarcoDuquePage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-ink transition-colors duration-200"
               >
-                View platform documentation →
+                Platform documentation →
               </a>
             </div>
           </RevealSection>
 
           <RevealSection delay={100}>
             <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-              {SHLOMO_CARDS.map((card) => (
+              {PLATFORM_CARDS.map((card) => (
                 <div key={card.title} className="bg-surface p-6">
                   <h3 className="text-sm font-semibold text-ink">{card.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{card.body}</p>
