@@ -249,10 +249,10 @@ export default function MarcoDuquePage() {
           <RevealSection>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-faint">Engineering Project</h2>
             <p className="mt-3 text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
-              Shlomo — Enterprise-Grade Distributed SaaS Platform.
+              RECS — Regulatory Education &amp; Certification System.
             </p>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              Production SaaS for NYC DOB training providers. 11 independently deployable microservices,
+              Enterprise-grade SaaS platform for NYC DOB training providers. 11 independently deployable microservices,
               event-driven architecture, transactional integrity, fault-tolerant session management,
               and a real-time AWS AI/ML identity pipeline — designed and built solo.
             </p>
@@ -329,7 +329,7 @@ export default function MarcoDuquePage() {
                   mduque@shlomo.us
                 </Button>
                 <a href="/" className="text-sm text-muted hover:text-ink transition-colors duration-300">
-                  ← Back to Shlomo
+                  ← Back to shlomo.us
                 </a>
               </div>
             </div>
