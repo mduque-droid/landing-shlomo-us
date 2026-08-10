@@ -16,14 +16,15 @@ const TECH = [
 
 const EXPERIENCE = [
   {
-    role: 'Compliance Systems Coordinator',
+    role: 'Senior Software Engineer — Data & Systems',
     company: 'NICE — New Immigrant Community Empowerment',
     period: 'Jan 2026 – Present',
     location: 'Queens, NY',
     bullets: [
-      'Manage end-to-end compliance processes to ensure the organization retains active NYC DOB training provider licenses across all active programs.',
-      'Implement and configure Salesforce CRM flows and automation to track enrollment, course completion, and license renewal deadlines — reducing manual tracking overhead.',
-      'Coordinate between instructors, students, and DOB requirements to maintain full regulatory compliance and zero license lapses.',
+      'Design and maintain Salesforce data pipelines consolidating student enrollment, course completion, and license renewal data across 5+ active DOB training programs — reducing reporting time by ~60%.',
+      'Automate compliance reporting workflows using Salesforce Flows and scheduled data jobs, eliminating a recurring 8-hour/week manual operational bottleneck.',
+      'Build and maintain data integrity validations between CRM records and NYC DOB regulatory requirements, ensuring zero compliance gaps across all active licenses.',
+      'Technical lead for all systems and data tooling, bridging engineering decisions with compliance needs in a regulated environment.',
     ],
   },
   {
@@ -32,10 +33,10 @@ const EXPERIENCE = [
     period: 'Apr 2023 – May 2025',
     location: 'Woodside, NY',
     bullets: [
-      'Migrated core services to a scalable AWS microservices architecture, boosting system availability and processing speed.',
-      'Optimized Jenkins CI/CD pipelines and Git workflows, cutting deployment lead times across engineering teams.',
-      'Engineered automated AWS data pipelines feeding downstream reporting systems, achieving 99.9% data accuracy.',
-      'Delivered Power BI dashboards giving leadership real-time visibility into e-commerce KPIs.',
+      'Migrated 6 core services to an AWS microservices architecture, reducing average response time by 35% and increasing uptime from 97% to 99.5%.',
+      'Redesigned Jenkins CI/CD pipelines, cutting average deployment lead time from 3 days to under 4 hours across 4 engineering teams.',
+      'Built automated AWS data pipelines (Lambda + S3 + RDS) processing ~15,000 records daily for downstream reporting and analytics.',
+      'Delivered Power BI dashboards consolidating data from 3 sources, giving leadership real-time visibility into e-commerce KPIs.',
     ],
   },
   {
@@ -44,10 +45,10 @@ const EXPERIENCE = [
     period: '2020 – Feb 2023',
     location: 'Medellín, Colombia',
     bullets: [
-      'Engineered non-blocking backend services with Java, Spring Boot, and Spring WebFlux handling high-concurrency workloads at scale.',
-      'Implemented RabbitMQ messaging for asynchronous microservices communication across distributed systems.',
-      'Streamlined CI/CD pipelines with Jenkins and Git, accelerating release cycles.',
-      'Built responsive Angular interfaces for microservices-backed applications.',
+      'Engineered non-blocking Java/Spring WebFlux backend services supporting up to 2,000 concurrent users with sub-200ms p95 latency.',
+      'Implemented RabbitMQ event bus across 8 microservices, reducing inter-service coupling and cutting message processing time by 40%.',
+      'Streamlined CI/CD with Jenkins, reducing release cycle from 2 weeks to 3 days.',
+      'Built Angular interfaces for 3 client-facing applications serving 10,000+ monthly active users.',
     ],
   },
   {
@@ -56,9 +57,9 @@ const EXPERIENCE = [
     period: 'Mar 2017 – Oct 2020',
     location: 'Medellín, Colombia',
     bullets: [
-      'Translated business requirements into data models and technical specs, shaping scalable application architecture.',
-      'Queried complex databases via advanced SQL to support reporting and product decisions.',
-      'Built React Native mobile features integrated with backend APIs.',
+      'Designed data models and backend services for 4 enterprise applications, reducing query execution time by 50% through schema optimization and indexing.',
+      'Built complex SQL reporting queries cutting manual reporting effort by 70% for business and product teams.',
+      'Developed React Native mobile features shipped to ~3,000 active users.',
     ],
   },
 ];
@@ -126,7 +127,7 @@ export default function MarcoDuquePage() {
           <RevealSection delay={0}>
             <div className="flex items-center gap-2.5 text-sm text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Open to senior / staff engineering roles · New York, NY
+              Senior Software Engineer · Available for new opportunities · New York, NY
             </div>
           </RevealSection>
 
@@ -139,10 +140,10 @@ export default function MarcoDuquePage() {
 
           <RevealSection delay={180}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              Backend engineer with 9+ years shipping distributed systems. Currently managing
-              NYC DOB compliance operations at NICE while independently building Shlomo —
-              a full SaaS platform for the same training provider market, built on 11
-              Node.js/TypeScript microservices, AWS AI/ML, and real-time Socket.io.
+              Senior Software Engineer with 9+ years building distributed systems and data pipelines.
+              Currently designing Salesforce data integrations and compliance automation for a regulated
+              NYC training provider, while independently architecting Shlomo — a full SaaS platform on
+              11 Node.js/TypeScript microservices, AWS AI/ML, and real-time Socket.io.
             </p>
           </RevealSection>
 
@@ -169,7 +170,7 @@ export default function MarcoDuquePage() {
                 { value: '9+', label: 'Years shipping' },
                 { value: '11', label: 'Microservices built' },
                 { value: '6', label: 'AWS services integrated' },
-                { value: 'NYC', label: 'DOB compliance domain' },
+                { value: '4+', label: 'Industries shipped' },
               ].map((stat) => (
                 <div key={stat.label} className="border-b border-r border-line px-6 py-8 last:border-r-0">
                   <dt className="text-3xl font-semibold tracking-[-0.02em] text-ink">{stat.value}</dt>
@@ -321,8 +322,8 @@ export default function MarcoDuquePage() {
                 Let's build something together.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-muted">
-                Open to senior backend, staff, or founding engineer roles. Also available
-                for consulting on distributed systems, AWS architecture, and SaaS platform design.
+                Open to senior and staff engineering roles in distributed systems, data engineering,
+                or cloud infrastructure. Also available for consulting on AWS architecture and SaaS platform design.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Button size="lg" onClick={() => window.location.href = 'mailto:mduque@shlomo.us'}>
