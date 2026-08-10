@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import siteData from './constants/siteData';
+import MarcoDuquePage from './pages/MarcoDuque';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
 import Services from './components/sections/Services';
@@ -68,6 +70,39 @@ function App() {
     : activeModal === 'terms'
     ? siteData.legal.terms
     : null;
+
+  return (
+    <Routes>
+      <Route path="/marco-duque" element={<MarcoDuquePage />} />
+      <Route path="/*" element={<MainLayout
+        siteData={siteData}
+        activeModal={activeModal}
+        activeServiceModal={activeServiceModal}
+        isContactFormOpen={isContactFormOpen}
+        modalContent={modalContent}
+        handlers={{
+          handleHeroClick,
+          handlePortfolioClick,
+          handleHeaderCTA,
+          handleOpenLegalModal,
+          handleCloseLegalModal,
+          handleOpenContactForm,
+          handleCloseContactForm,
+          handleOpenServiceModal,
+          handleCloseServiceModal,
+        }}
+      />} />
+    </Routes>
+  );
+}
+
+function MainLayout({ siteData, activeModal, activeServiceModal, isContactFormOpen, modalContent, handlers }) {
+  const {
+    handleHeroClick, handlePortfolioClick, handleHeaderCTA,
+    handleOpenLegalModal, handleCloseLegalModal,
+    handleOpenContactForm, handleCloseContactForm,
+    handleOpenServiceModal, handleCloseServiceModal,
+  } = handlers;
 
   return (
     <div className="min-h-screen bg-paper">

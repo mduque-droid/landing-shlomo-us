@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operations Manual — RECS</title>
+<style>
+  :root {
+    --brand:        #1a3a5c;
+    --brand-light:  #2c5f8a;
+    --accent:       #c9a227;
+    --bg:           #f4f6f9;
+    --surface:      #ffffff;
+    --text:         #24303b;
+    --muted:        #5b6b7a;
+    --border:       #dfe5ec;
+    --note-bg:      #eaf3fb;
+    --note-br:      #2c5f8a;
+    --warn-bg:      #fdf3e7;
+    --warn-br:      #c9822a;
+    --ok:           #2f8a4c;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  .wrap { max-width: 950px; margin: 0 auto; padding: 0 20px 80px; }
+
+  header.cover {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+    color: #fff;
+    padding: 60px 20px 50px;
+    text-align: center;
+    border-bottom: 6px solid var(--accent);
+  }
+  header.cover .brand { letter-spacing: 3px; text-transform: uppercase; font-size: 14px; font-weight: 600; opacity: .9; }
+  header.cover .logo { display: inline-block; font-size: 40px; font-weight: 800; letter-spacing: 6px; padding: 6px 22px; border: 3px solid var(--accent); border-radius: 10px; margin-bottom: 14px; }
+  header.cover h1 { margin: 14px auto 6px; font-size: 34px; font-weight: 700; max-width: 720px; line-height: 1.25; }
+  header.cover p.subtitle { margin: 4px 0 0; font-size: 17px; opacity: .92; }
+  .cover-meta { margin-top: 26px; display: inline-flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center; font-size: 13px; opacity: .9; }
+  .cover-meta span b { color: var(--accent); font-weight: 600; }
+
+  nav.toc { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 28px; margin: 34px 0; box-shadow: 0 2px 10px rgba(26,58,92,.05); }
+  nav.toc h2 { margin: 0 0 12px; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; color: var(--brand); border: 0; padding: 0; }
+  nav.toc ol { margin: 0; padding-left: 20px; }
+  nav.toc li { margin: 6px 0; }
+  nav.toc a { color: var(--brand-light); text-decoration: none; font-weight: 500; }
+  nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 34px 30px; margin: 22px 0; box-shadow: 0 2px 10px rgba(26,58,92,.05); }
+
+  h2 { color: var(--brand); font-size: 24px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 30px; }
+  h3 { color: var(--brand-light); font-size: 19px; margin-top: 28px; }
+  h4 { color: var(--text); font-size: 16px; margin-top: 22px; text-transform: uppercase; letter-spacing: .5px; }
+
+  p { margin: 12px 0; }
+  ul, ol { margin: 12px 0; padding-left: 24px; }
+  li { margin: 5px 0; }
+  a { color: var(--brand-light); }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 11px 14px; border: 1px solid var(--border); vertical-align: top; }
+  thead th { background: var(--brand); color: #fff; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #f7f9fc; }
+  tbody tr:hover { background: var(--note-bg); }
+
+  .callout { border-radius: 8px; padding: 14px 18px 14px 16px; margin: 18px 0; border-left: 5px solid; font-size: 15px; }
+  .callout .tag { font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: .3px; }
+  .note    { background: var(--note-bg);  border-color: var(--note-br); }
+  .note .tag    { color: var(--note-br); }
+  .warn    { background: var(--warn-bg);  border-color: var(--warn-br); }
+  .warn .tag    { color: var(--warn-br); }
+
+  pre.tree { background: #10202f; color: #d6e2ee; padding: 20px 24px; border-radius: 8px; overflow-x: auto; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 14px; line-height: 1.6; border-left: 4px solid var(--accent); }
+  pre.tree .hl { color: var(--accent); font-weight: 600; }
+
+  .ok  { color: var(--ok); font-weight: 700; }
+
+  .summary { background: #eef6f0; border: 1px solid #bfe0c8; border-left: 5px solid var(--ok); border-radius: 8px; padding: 18px 22px; margin: 22px 0; }
+  .summary h3 { margin-top: 0; color: var(--ok); }
+
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--border); }
+  footer .support { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; color: var(--text); }
+
+  .rep-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 20px; letter-spacing: .4px; vertical-align: middle; margin-left: 8px; }
+  .badge-dob { background: #fdeaea; color: #b5322f; border: 1px solid #f2c4c2; }
+  .badge-op  { background: #e8f1fb; color: #245b8c; border: 1px solid #c4dcf1; }
+
+  .report { margin: 28px 0; }
+  .report p { margin: 6px 0; }
+
+  .chart { margin: 14px 0 4px; padding: 16px 18px 18px; background: #fbfcfe; border: 1px solid var(--border); border-radius: 8px; }
+  .chart-title { font-size: 12px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); font-weight: 700; margin-bottom: 16px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 4px; font-size: 12.5px; color: var(--text); }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; flex: none; }
+
+  .hbars { display: flex; flex-direction: column; gap: 11px; }
+  .hbar { display: grid; grid-template-columns: 120px 1fr 66px; align-items: center; gap: 12px; font-size: 13px; }
+  .hbar .track { background: #e7edf4; border-radius: 5px; height: 15px; overflow: hidden; }
+  .hbar .fill { height: 100%; border-radius: 5px; background: var(--brand-light); }
+  .hbar .fill.done { background: var(--ok); }
+  .hbar .val { font-size: 12px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+  .cols { display: flex; align-items: flex-end; gap: 12px; height: 122px; position: relative; }
+  .cols .col { flex: 1; display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+  .cols .col .bar { width: 58%; background: var(--brand-light); border-radius: 4px 4px 0 0; position: relative; }
+  .cols .col .bar.hit { background: var(--warn-br); }
+  .cols .col .bar .cap-v { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+  .cols .limit { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--warn-br); }
+  .cols .limit span { position: absolute; right: 2px; top: -15px; font-size: 10.5px; color: var(--warn-br); font-weight: 700; background: #fbfcfe; padding: 0 4px; }
+  .col-labels { display: flex; gap: 12px; margin-top: 8px; }
+  .col-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--muted); }
+
+  .donut-wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .donut { flex: none; }
+
+  .doc-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; max-width: 470px; }
+  .doc-head { background: var(--brand); color: #fff; font-size: 13px; font-weight: 600; padding: 9px 14px; }
+  .doc-check { list-style: none; margin: 0; padding: 8px 14px; }
+  .doc-check li { display: flex; align-items: center; gap: 11px; padding: 7px 0; font-size: 13.5px; border-bottom: 1px solid #eef2f6; }
+  .doc-check li:last-child { border-bottom: 0; }
+  .doc-check .ck { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+
+  @media print {
+    body { background: #fff; font-size: 12px; }
+    section, nav.toc { box-shadow: none; border-color: #ccc; page-break-inside: avoid; }
+    header.cover { padding: 30px 10px; }
+    a { color: var(--text); text-decoration: none; }
+    .callout, table, .chart, .report, .doc-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="logo">RECS</div>
+  <div class="brand">Regulatory Education &amp; Certification System</div>
+  <h1>Operations Manual &amp; User Guide</h1>
+  <p class="subtitle">Integrated Training, Management &amp; Certification Platform</p>
+  <div class="cover-meta">
+    <span><b>Document:</b> Operational Guide for Administrators &amp; Operators</span>
+    <span><b>Version:</b> 1.0</span>
+    <span><b>Audience:</b> Non-technical operations staff</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#s1">Platform Overview &amp; Purpose</a></li>
+      <li><a href="#s2">Operational Glossary</a></li>
+      <li><a href="#s3">Step-by-Step Operational Workflows</a></li>
+      <li><a href="#s4">Reports Catalog</a></li>
+      <li><a href="#s5">Incident Handling &amp; FAQ</a></li>
+    </ol>
+  </nav>
+
+  <div class="summary">
+    <h3>Executive Summary</h3>
+    <p><strong>RECS (Regulatory Education &amp; Certification System)</strong> is the integrated platform through which
+    your organization <strong>administers, delivers, monitors, and certifies</strong> training programs that lead to
+    State and Federal licenses. Within RECS, each <strong>License</strong> defines the legal rules of a program —
+    validity period, daily hour limits, program manager, and required identity verification modes — and groups one or
+    more <strong>Specialties</strong> (with minimum hours, validity years, and CEU credits). Each Specialty is composed
+    of <strong>Modules and Lessons</strong> and is delivered through <strong>Courses</strong>. RECS monitors students
+    in real time via <strong>Active Proctoring</strong> — profile photo, facial recognition, valid ID, email, phone,
+    and address — and only issues a <strong>Certificate</strong> once effective hours, verified attendance, and
+    identity requirements are fully met, leaving an immutable audit trail for regulatory authorities.</p>
+  </div>
+
+  <!-- ============ SECTION 1 ============ -->
+  <section id="s1">
+    <h2>1. Platform Overview &amp; Purpose</h2>
+    <p><strong>RECS (Regulatory Education &amp; Certification System)</strong> is your organization's unified
+    workspace to <strong>administer, deliver, monitor, and certify</strong> training programs leading to
+    <strong>State</strong> and <strong>Federal</strong> licenses.</p>
+
+    <p>From a single <strong>Control Panel</strong>, your team can:</p>
+    <ul>
+      <li>Configure the <strong>legal rules</strong> of each license (validity period, minimum hours, daily limits, and required identity verifications).</li>
+      <li>Design the course catalog: <strong>Specialties, Courses, Modules, and Lessons</strong>.</li>
+      <li>Monitor each student in real time through <strong>Active Proctoring</strong>, ensuring the person studying is actually the enrolled individual — without requiring constant manual supervision.</li>
+      <li><strong>Audit, issue, and renew</strong> certificates that are valid before regulatory bodies, backed by a dispute-proof evidence record.</li>
+    </ul>
+
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      RECS is built on a <em>compliance-by-design</em> principle: the system will not issue a certificate unless
+      all legally configured requirements have been verifiably met. This protects your organization against
+      audits and disputes.
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 ============ -->
+  <section id="s2">
+    <h2>2. Operational Glossary</h2>
+    <p>Before operating RECS, familiarize yourself with these five core concepts and how they relate to each other.</p>
+
+    <h3>2.1 What is a License (State or Federal)?</h3>
+    <p>A <strong>License</strong> is the "rules contract" that defines how a training program must legally be fulfilled.
+    It is the highest-level entity in RECS. Each License stores:</p>
+    <table>
+      <thead><tr><th>Field on screen</th><th>Operational meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Name</strong></td><td>Official name of the license.</td></tr>
+        <tr><td><strong>Type (State / Federal)</strong></td><td>Indicates which regulatory authority governs the program.</td></tr>
+        <tr><td><strong>Legal description</strong></td><td>Regulatory text printed on the certificate.</td></tr>
+        <tr><td><strong>Training validity (months)</strong></td><td>Maximum time the student has to complete the training before it expires.</td></tr>
+        <tr><td><strong>Daily hour limit</strong></td><td>Maximum hours a student can accumulate per day (a common legal requirement).</td></tr>
+        <tr><td><strong>Program Manager (name &amp; signature)</strong></td><td>The responsible person who endorses and signs the certificates.</td></tr>
+        <tr><td><strong>Required Verification Modes</strong></td><td>Which identity checks will be applied (see section 2.4).</td></tr>
+      </tbody>
+    </table>
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      The <strong>State / Federal</strong> distinction determines which issuing body recognizes the program and
+      typically implies stricter verification rules at the Federal level.
+    </div>
+
+    <h3>2.2 How is a Specialty defined?</h3>
+    <p>A <strong>Specialty</strong> is the <strong>specific credential</strong> the student will earn. It always
+    belongs to a License (inheriting its legal rules) and adds its own requirements:</p>
+    <table>
+      <thead><tr><th>Field on screen</th><th>Operational meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Name &amp; Code</strong></td><td>Specialty identifier (the code is usually required by the regulator).</td></tr>
+        <tr><td><strong>Training hours</strong></td><td>Minimum <strong>effective hours</strong> the student must accumulate to pass.</td></tr>
+        <tr><td><strong>Validity years</strong></td><td>How long the credential remains valid once issued (basis for renewal).</td></tr>
+        <tr><td><strong>CEU / Credits</strong></td><td>Continuing education credits awarded.</td></tr>
+        <tr><td><strong>In-person modality</strong></td><td>Indicates whether the specialty requires in-person attendance.</td></tr>
+        <tr><td><strong>Price</strong></td><td>Enrollment cost.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.3 How is a Course linked to a Specialty to grant or renew a License?</h3>
+    <p>The value chain follows this hierarchy. Understanding it is the key to operating RECS:</p>
+    <pre class="tree"><span class="hl">LICENSE</span> (legal rules: validity, hours, verifications)
+   └─ <span class="hl">SPECIALTY</span> (credential: minimum hours, validity, CEU)
+          └─ <span class="hl">MODULES</span> (thematic units, ordered)
+                 └─ <span class="hl">LESSONS</span> (video content + text)
+                        └─ <span class="hl">ASSESSMENTS</span> (questions &amp; answers)
+
+<span class="hl">COURSE</span> ──(linked to one or more)──► <span class="hl">SPECIALTIES</span></pre>
+    <ul>
+      <li>The <strong>Specialty</strong> contains the mandatory content (Modules and Lessons) and the minimum hours required by regulation.</li>
+      <li>The <strong>Course</strong> is the "commercial and academic vehicle" through which a student enrolls; it is <strong>linked</strong> to the specialties it enables.</li>
+      <li>When the student <strong>completes</strong> a specialty — meeting hours + assessments + identity verifications — RECS <strong>issues the certificate</strong> accrediting the license. <strong>Renewal</strong> is managed based on the specialty's <em>Validity years</em>.</li>
+    </ul>
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      A single Specialty can be linked to multiple Courses, and a Course can enable multiple Specialties.
+      This lets you reuse content without duplicating work.
+    </div>
+
+    <h3>2.4 What is Active Proctoring?</h3>
+    <p>Active Proctoring is the set of <strong>identity checks</strong> that RECS requires and verifies automatically.
+    They are configured at the License level and may include:</p>
+    <table>
+      <thead><tr><th>Verification Mode</th><th>What it involves</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Profile Photo</strong></td><td>The student submits a headshot photo, automatically validated (face visible, frontal, no glasses or hat, clear background).</td></tr>
+        <tr><td><strong>Facial Recognition</strong></td><td>During study sessions, the student's live face is periodically compared against the registered profile photo.</td></tr>
+        <tr><td><strong>Identity Document (Valid ID)</strong></td><td>The student uploads an official document (front and back), which is reviewed and approved.</td></tr>
+        <tr><td><strong>Email</strong></td><td>Verified via a confirmation code.</td></tr>
+        <tr><td><strong>Phone</strong></td><td>Verified via a confirmation code.</td></tr>
+        <tr><td><strong>Address</strong></td><td>Confirmation of the registered home address.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ SECTION 3 ============ -->
+  <section id="s3">
+    <h2>3. Step-by-Step Operational Workflows</h2>
+
+    <h3>3.1 Licenses &amp; Specialties Module</h3>
+    <div class="callout note">
+      <span class="tag">Access</span>
+      Log in to the RECS <strong>Control Panel</strong> and open the <strong>Licenses Section</strong> (requires
+      <em>Configuration</em> permission). Specialties are managed in the <strong>Specialties Module</strong>.
+    </div>
+
+    <h4>A. Creating a License and configuring its rules</h4>
+    <ol>
+      <li>In the <strong>Licenses Section</strong>, click <strong>"Create new License"</strong>.</li>
+      <li>Enter the <strong>Name</strong> and select the <strong>Type</strong>: <em>State</em> or <em>Federal</em>.</li>
+      <li>Write the <strong>Legal description</strong> that will appear on the certificate and the <strong>Program Manager</strong> name.</li>
+      <li>Set the compliance rules:
+        <ul>
+          <li><strong>Training validity (months)</strong> — deadline to complete.</li>
+          <li><strong>Daily hour limit</strong> — maximum hours allowed per day.</li>
+        </ul>
+      </li>
+      <li>In the <strong>Verification tab</strong>, enable the required <strong>Verification Modes</strong> (Profile Photo, Facial Recognition, Valid ID, Email, Phone, Address).</li>
+      <li>Upload the <strong>logo</strong> and <strong>manager's signature</strong> that will appear on certificates.</li>
+      <li>Associate the license with the <strong>Sub-school(s)</strong> (branch or institution) that will offer it.</li>
+      <li>Save. The license becomes <strong>Active</strong> and available for creating specialties.</li>
+    </ol>
+    <div class="callout warn">
+      <span class="tag">⚠ Warning</span>
+      Verification Modes must be configured <strong>before</strong> enrolling students. If <em>Facial Recognition</em>
+      or <em>Profile Photo</em> is enabled, the student cannot start training until their profile photo is
+      <strong>approved</strong>.
+    </div>
+
+    <h4>B. Creating a Specialty and linking courses</h4>
+    <ol>
+      <li>Open the <strong>Specialties Module</strong> and click <strong>"New Specialty"</strong>.</li>
+      <li>Select the <strong>License</strong> it belongs to (inherits its legal rules).</li>
+      <li>Fill in <strong>Name, Code, Training hours (minimum), Validity years, CEU</strong>, and <strong>Price</strong>.</li>
+      <li>Indicate whether it is <strong>In-person</strong>.</li>
+      <li>Build the mandatory content: add <strong>Modules</strong> (in order) and, within each, the <strong>Lessons</strong> (with video and text) and their <strong>Assessments</strong>.</li>
+      <li>Go to the <strong>Courses Module</strong>, create or edit a Course, and in the <strong>Specialties tab</strong>, <strong>link</strong> it to this specialty.</li>
+      <li>Activate the specialty (<strong>Status: Active</strong>) to publish it.</li>
+    </ol>
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      The <strong>Training hours</strong> defined here are the legal minimum. RECS <strong>will not certify</strong>
+      a student who has not accumulated that amount of <strong>effective</strong> study time.
+    </div>
+
+    <h3>3.2 Live Student Monitoring (Active Proctoring)</h3>
+    <p>Active Proctoring works <strong>automatically</strong> while the student studies. Your team does
+    <strong>not</strong> need to watch manually: RECS monitors, records, and acts on its own. Here's how:</p>
+
+    <h4>At the start of a study session</h4>
+    <ol>
+      <li>RECS checks <strong>all</strong> verification modes required by the license (email, phone, address, profile photo, ID, face).</li>
+      <li>If any requirement is unmet (e.g., the profile photo is not approved), <strong>study cannot begin</strong> and the student is told what to correct.</li>
+    </ol>
+
+    <h4>During the study session</h4>
+    <ol>
+      <li>If the license requires <strong>Facial Recognition</strong>, RECS requests a <strong>live photo periodically</strong> (approximately <strong>every 5 minutes</strong>).</li>
+      <li>That photo is <strong>automatically compared</strong> against the registered profile photo and must reach a <strong>high confidence match</strong> to be considered valid.</li>
+      <li>The <strong>daily hour limit</strong> is also enforced: when the student reaches the limit set by the license, RECS <strong>stops counting time</strong> for that day.</li>
+    </ol>
+
+    <h4>Audit log (automatic)</h4>
+    <p>Every check — successful or failed — is saved in the student's <strong>Verification History</strong>,
+    including the mode checked, the result, the reason for failure (if any), and the date and time. This history
+    is the evidence that backs the certificate's legal validity.</p>
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      RECS distinguishes between an <strong>identity failure</strong> (face does not match) and a
+      <strong>technical issue</strong> (camera not permitted, blurry image). Only identity failures affect
+      compliance; technical issues are flagged separately so students are not unfairly penalized.
+    </div>
+
+    <h3>3.3 Auditing, Issuing, and Renewing Licenses</h3>
+    <div class="callout note">
+      <span class="tag">Access</span>
+      <strong>Reports Module</strong> and the student's record in the <strong>Student Management Module</strong>.
+    </div>
+
+    <h4>A. Checking the status of a training</h4>
+    <p>In the student's record you will see the <strong>Training Status</strong>, which can be:</p>
+    <table>
+      <thead><tr><th>Status</th><th>Operational meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Not started</strong></td><td>Enrolled but has not yet begun studying.</td></tr>
+        <tr><td><strong>In progress</strong></td><td>Active; accumulating hours and verifications.</td></tr>
+        <tr><td><strong>Completed</strong></td><td>All requirements met; certificate issued.</td></tr>
+        <tr><td><strong>Not passed</strong></td><td>Did not meet requirements (time, assessment, or validity expired).</td></tr>
+      </tbody>
+    </table>
+    <p>RECS also shows the <strong>completion percentage</strong>, <strong>effective hours accumulated</strong>,
+    and the <strong>training expiration date</strong>.</p>
+
+    <h4>B. Verifying compliance and issuing the certificate</h4>
+    <p>Before issuing, RECS automatically runs a <strong>legal compliance checklist</strong>. The certificate is
+    <strong>only</strong> issued if <strong>all</strong> conditions are met:</p>
+    <ul>
+      <li><span class="ok">✓</span> The training is <strong>not already completed</strong> or <strong>expired</strong>.</li>
+      <li><span class="ok">✓</span> The <strong>payment / enrollment</strong> is complete.</li>
+      <li><span class="ok">✓</span> <strong>Effective hours</strong> meet the specialty's <strong>minimum</strong>.</li>
+      <li><span class="ok">✓</span> <strong>Identity</strong> is verified according to the required modes (approved profile photo, valid ID uploaded, contact verified).</li>
+    </ul>
+    <p>Upon issuance, RECS generates a <strong>PDF certificate with a QR code</strong> and saves a
+    <strong>"Validation Snapshot"</strong>: a frozen copy of all evidence (verified identity, hours met, minimum
+    time, document, specialty, and license) at the exact moment of issuance.</p>
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      The <strong>Validation Snapshot</strong> is your best asset in an audit: it reflects the rules and evidence
+      as they were at the time of certification, even if the configuration changes later. The <strong>QR code</strong>
+      allows any regulatory authority to verify the certificate's authenticity.
+    </div>
+
+    <h4>C. Downloading certificates and reports</h4>
+    <p>In the <strong>Reports Module</strong> you can download:</p>
+    <ul>
+      <li>Individual student <strong>Certificates</strong> (PDF with QR).</li>
+      <li>Reports for <strong>Students</strong>, <strong>Courses</strong>, <strong>Operators</strong>, <strong>Invoices</strong>, and <strong>Sub-school</strong>.</li>
+    </ul>
+
+    <h4>D. License renewal</h4>
+    <p>The credential's validity period is governed by the specialty's <strong>Validity years</strong>. To renew,
+    re-enroll the student in the corresponding specialty; RECS will again require hours and verifications to be
+    met before issuing the renewed certificate.</p>
+  </section>
+
+  <!-- ============ SECTION 4 ============ -->
+  <section id="s4">
+    <h2>4. Reports Catalog</h2>
+    <p>The <strong>Reports Module</strong> is where you query, filter, and download information from RECS. All
+    reports can be scoped by <strong>date range, location, course, or student</strong> and exported as
+    <strong>PDF or spreadsheet</strong>. They fall into two families: <strong>Compliance</strong> reports
+    (required by the regulator) and <strong>Operations</strong> reports (for day-to-day management).</p>
+
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      The charts accompanying each report are <strong>illustrative examples</strong> of how information is
+      displayed on screen; values shown are sample data.
+    </div>
+
+    <h3>4.1 Compliance Reports (NYC DOB)</h3>
+    <div class="callout warn">
+      <span class="tag">⚠ Warning</span>
+      These reports are the <strong>legal evidence</strong> that training meets regulatory standards. They must
+      always be available — they are the first documents a regulator requests in an audit.
+    </div>
+
+    <div class="report">
+      <h4>1. Certificate &amp; Card Issuance Registry <span class="rep-badge badge-dob">DOB Required</span></h4>
+      <p><strong>What it shows:</strong> the complete list of issued certificates and cards, with their unique
+      folio number, the student, the course/specialty, the license type (State or Federal), and the completion date.</p>
+      <p><strong>When to use it:</strong> when an authority requests proof of who was certified and under which program.</p>
+      <div class="chart">
+        <div class="chart-title">Certificates issued per month</div>
+        <div class="cols">
+          <div class="col"><div class="bar" style="height:44%"><span class="cap-v">40</span></div></div>
+          <div class="col"><div class="bar" style="height:61%"><span class="cap-v">55</span></div></div>
+          <div class="col"><div class="bar" style="height:53%"><span class="cap-v">48</span></div></div>
+          <div class="col"><div class="bar" style="height:78%"><span class="cap-v">70</span></div></div>
+          <div class="col"><div class="bar" style="height:69%"><span class="cap-v">62</span></div></div>
+          <div class="col"><div class="bar" style="height:92%"><span class="cap-v">88</span></div></div>
+        </div>
+        <div class="col-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>2. Student Training Hours Log <span class="rep-badge badge-dob">DOB Required</span></h4>
+      <p><strong>What it shows:</strong> the effective hours each student accumulated versus the required minimum hours.</p>
+      <p><strong>When to use it:</strong> to demonstrate, student by student, that the required study time was met.</p>
+      <div class="chart">
+        <div class="chart-title">Hours accumulated vs. required minimum (40 h)</div>
+        <div class="hbars">
+          <div class="hbar"><span>A. Ruiz</span><span class="track"><span class="fill done" style="width:100%"></span></span><span class="val">40 / 40 h</span></div>
+          <div class="hbar"><span>J. Perez</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="val">32 / 40 h</span></div>
+          <div class="hbar"><span>M. Gomez</span><span class="track"><span class="fill done" style="width:100%"></span></span><span class="val">40 / 40 h</span></div>
+          <div class="hbar"><span>L. Diaz</span><span class="track"><span class="fill" style="width:45%"></span></span><span class="val">18 / 40 h</span></div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--ok)"></i> Requirement met</span>
+          <span><i style="background:var(--brand-light)"></i> In progress</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>3. Identity Verification Log (Active Proctoring) <span class="rep-badge badge-dob">DOB Required</span></h4>
+      <p><strong>What it shows:</strong> every identity check performed during study (photo, facial recognition,
+      document), with its result and the moment it occurred.</p>
+      <p><strong>When to use it:</strong> to prove that the person who studied is actually the enrolled individual —
+      a key requirement for online training.</p>
+      <div class="chart">
+        <div class="chart-title">Identity verifications for the period</div>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="92% successful verifications">
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#2f8a4c" stroke-width="16" stroke-dasharray="242.8 21.1" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#c9822a" stroke-width="16" stroke-dasharray="21.1 242.8" stroke-dashoffset="-242.8" transform="rotate(-90 60 60)"/>
+            <text x="60" y="60" text-anchor="middle" dominant-baseline="central" font-size="21" font-weight="700" fill="#24303b">92%</text>
+          </svg>
+          <div class="legend" style="flex-direction:column; gap:9px">
+            <span><i style="background:#2f8a4c"></i> Successful verifications — 92%</span>
+            <span><i style="background:#c9822a"></i> Retries / identity failures — 8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>4. Daily Hour Limit Compliance Report <span class="rep-badge badge-dob">DOB Required</span></h4>
+      <p><strong>What it shows:</strong> hours each student studied per day, highlighting days when they reached
+      the permitted daily cap.</p>
+      <p><strong>When to use it:</strong> to prove no student accumulated more hours per day than regulations allow.</p>
+      <div class="chart">
+        <div class="chart-title">Study hours per day — daily cap 8 h</div>
+        <div class="cols">
+          <div class="limit" style="bottom:80%"><span>Cap 8 h</span></div>
+          <div class="col"><div class="bar" style="height:60%"></div></div>
+          <div class="col"><div class="bar hit" style="height:80%"></div></div>
+          <div class="col"><div class="bar" style="height:70%"></div></div>
+          <div class="col"><div class="bar hit" style="height:80%"></div></div>
+          <div class="col"><div class="bar" style="height:50%"></div></div>
+          <div class="col"><div class="bar hit" style="height:80%"></div></div>
+        </div>
+        <div class="col-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="legend">
+          <span><i style="background:var(--warn-br)"></i> Day that reached the permitted cap</span>
+          <span><i style="background:var(--brand-light)"></i> Day within the limit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>5. Identity Document Status Report <span class="rep-badge badge-dob">DOB Required</span></h4>
+      <p><strong>What it shows:</strong> how many students have their identity document approved, pending, or rejected.</p>
+      <p><strong>When to use it:</strong> before certifying, to ensure no one advances without a validated identity.</p>
+      <div class="chart">
+        <div class="chart-title">Identity documents by status</div>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="78% approved documents">
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#2f8a4c" stroke-width="16" stroke-dasharray="205.8 58.1" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#c9822a" stroke-width="16" stroke-dasharray="39.6 224.3" stroke-dashoffset="-205.8" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#b5322f" stroke-width="16" stroke-dasharray="18.5 245.4" stroke-dashoffset="-245.4" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="legend" style="flex-direction:column; gap:9px">
+            <span><i style="background:#2f8a4c"></i> Approved — 78%</span>
+            <span><i style="background:#c9822a"></i> Pending review — 15%</span>
+            <span><i style="background:#b5322f"></i> Rejected — 7%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>6. Student Audit Dossier <span class="rep-badge badge-dob">DOB Required</span></h4>
+      <p><strong>What it shows:</strong> a single document compiling, per student, all their evidence: verified
+      identity, hours completed, assessment results, and issued certificate.</p>
+      <p><strong>When to use it:</strong> when an inspection arrives and you need to submit one person's complete
+      file in a single document.</p>
+      <div class="chart">
+        <div class="chart-title">Consolidated dossier view</div>
+        <div class="doc-card">
+          <div class="doc-head">Dossier — Ana Ruiz · Folio SST-2026-00841</div>
+          <ul class="doc-check">
+            <li><span class="ck">✓</span> Identity verified (document + facial recognition)</li>
+            <li><span class="ck">✓</span> Effective hours completed: 40 / 40 h</li>
+            <li><span class="ck">✓</span> Assessments passed</li>
+            <li><span class="ck">✓</span> Certificate issued — Jun 12, 2026</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>4.2 Operations Reports</h3>
+
+    <div class="report">
+      <h4>7. Enrollments Report <span class="rep-badge badge-op">Operational</span></h4>
+      <p><strong>What it shows:</strong> new enrollments by period, course, and location.</p>
+      <p><strong>When to use it:</strong> to track commercial momentum and see which courses attract the most students.</p>
+      <div class="chart">
+        <div class="chart-title">New enrollments per month</div>
+        <svg viewBox="0 0 320 130" style="width:100%; height:auto" role="img" aria-label="Enrollment trend">
+          <polygon points="20,65 78,52 136,57 194,38 252,42 300,23 300,95 20,95" fill="#dce9f5"/>
+          <polyline points="20,65 78,52 136,57 194,38 252,42 300,23" fill="none" stroke="#2c5f8a" stroke-width="2.5"/>
+          <circle cx="20" cy="65" r="3.2" fill="#2c5f8a"/>
+          <circle cx="78" cy="52" r="3.2" fill="#2c5f8a"/>
+          <circle cx="136" cy="57" r="3.2" fill="#2c5f8a"/>
+          <circle cx="194" cy="38" r="3.2" fill="#2c5f8a"/>
+          <circle cx="252" cy="42" r="3.2" fill="#2c5f8a"/>
+          <circle cx="300" cy="23" r="3.2" fill="#2c5f8a"/>
+          <g font-size="10" fill="#5b6b7a" text-anchor="middle">
+            <text x="20" y="112">Jan</text>
+            <text x="78" y="112">Feb</text>
+            <text x="136" y="112">Mar</text>
+            <text x="194" y="112">Apr</text>
+            <text x="252" y="112">May</text>
+            <text x="300" y="112">Jun</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>8. Revenue &amp; Billing Report <span class="rep-badge badge-op">Operational</span></h4>
+      <p><strong>What it shows:</strong> payments collected, along with refunds and annulments, grouped by course or location.</p>
+      <p><strong>When to use it:</strong> to monitor cash flow and reconcile payments for the period.</p>
+      <div class="chart">
+        <div class="chart-title">Revenue collected per month</div>
+        <div class="cols">
+          <div class="col"><div class="bar" style="height:43%"><span class="cap-v">$12k</span></div></div>
+          <div class="col"><div class="bar" style="height:54%"><span class="cap-v">$15k</span></div></div>
+          <div class="col"><div class="bar" style="height:50%"><span class="cap-v">$14k</span></div></div>
+          <div class="col"><div class="bar" style="height:75%"><span class="cap-v">$21k</span></div></div>
+          <div class="col"><div class="bar" style="height:68%"><span class="cap-v">$19k</span></div></div>
+          <div class="col"><div class="bar" style="height:93%"><span class="cap-v">$26k</span></div></div>
+        </div>
+        <div class="col-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>9. Training Status Overview <span class="rep-badge badge-op">Operational</span></h4>
+      <p><strong>What it shows:</strong> the distribution of students by progress: not started, in progress,
+      completed, or not passed.</p>
+      <p><strong>When to use it:</strong> to get an at-a-glance view of completion rates and identify stalled students.</p>
+      <div class="chart">
+        <div class="chart-title">Training distribution by status</div>
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="Training status distribution">
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#9aa8b5" stroke-width="16" stroke-dasharray="47.5 216.4" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#2c5f8a" stroke-width="16" stroke-dasharray="89.7 174.2" stroke-dashoffset="-47.5" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#2f8a4c" stroke-width="16" stroke-dasharray="105.6 158.3" stroke-dashoffset="-137.2" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#c9822a" stroke-width="16" stroke-dasharray="21.1 242.8" stroke-dashoffset="-242.8" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="legend" style="flex-direction:column; gap:9px">
+            <span><i style="background:#9aa8b5"></i> Not started — 18%</span>
+            <span><i style="background:#2c5f8a"></i> In progress — 34%</span>
+            <span><i style="background:#2f8a4c"></i> Completed — 40%</span>
+            <span><i style="background:#c9822a"></i> Not passed — 8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report">
+      <h4>10. Operator Activity Report <span class="rep-badge badge-op">Operational</span></h4>
+      <p><strong>What it shows:</strong> actions performed by each operator or administrator (registrations, approvals, changes).</p>
+      <p><strong>When to use it:</strong> to track team productivity and maintain internal traceability.</p>
+      <div class="chart">
+        <div class="chart-title">Actions logged per operator</div>
+        <div class="hbars">
+          <div class="hbar"><span>Carla M.</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">128</span></div>
+          <div class="hbar"><span>Diego R.</span><span class="track"><span class="fill" style="width:75%"></span></span><span class="val">96</span></div>
+          <div class="hbar"><span>Sofia L.</span><span class="track"><span class="fill" style="width:58%"></span></span><span class="val">74</span></div>
+          <div class="hbar"><span>Marco D.</span><span class="track"><span class="fill" style="width:41%"></span></span><span class="val">53</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5 ============ -->
+  <section id="s5">
+    <h2>5. Incident Handling &amp; FAQ</h2>
+
+    <h3>❓ What to do if a student is blocked by Active Proctoring?</h3>
+    <p>A block occurs when an identity verification <strong>is not passed</strong>. Follow these steps:</p>
+    <ol>
+      <li><strong>Open the student's Verification History</strong> (student record → verification section).</li>
+      <li><strong>Identify the reason</strong> logged:</li>
+    </ol>
+    <table>
+      <thead><tr><th>Reason shown</th><th>Recommended action</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Face does not match</strong></td><td>Ask the student to retake the photo in good lighting, facing forward. If it persists, verify that the registered <strong>profile photo</strong> is correct.</td></tr>
+        <tr><td><strong>Profile photo not approved</strong></td><td>Instruct the student to re-upload it following the rules (frontal face, no glasses/hat, clear background, sharp image).</td></tr>
+        <tr><td><strong>Technical issue</strong> (camera, blurry image)</td><td>Not a compliance failure. Ask the student to check camera permissions and try again.</td></tr>
+        <tr><td><strong>Identity document pending / rejected</strong></td><td>Review the uploaded document and <strong>approve</strong> it or request a legible one.</td></tr>
+        <tr><td><strong>Email or phone not verified</strong></td><td>Resend the <strong>validation code</strong> from the student's record.</td></tr>
+      </tbody>
+    </table>
+    <p>Once the requirement is corrected, the student can <strong>resume the session</strong> normally.</p>
+    <div class="callout warn">
+      <span class="tag">⚠ Warning</span>
+      Do not manually issue or force certificates to "unblock" a student. RECS blocks by design to protect
+      the legal validity of the certificate. Always resolve the <strong>root cause</strong> of the failed verification.
+    </div>
+
+    <h3>❓ How to manage alerts for licenses nearing expiration or inactive?</h3>
+    <ul>
+      <li><strong>Training nearing expiration:</strong> check the <strong>Reports / Students Module</strong> for trainings still <em>In progress</em> whose <strong>expiration date</strong> is approaching. Contact the student to complete their hours before the deadline.</li>
+      <li><strong>Credential up for renewal:</strong> use the specialty's <strong>Validity years</strong> to anticipate renewals and re-enroll the student on time.</li>
+      <li><strong>Inactive licenses or specialties:</strong> in the <strong>Licenses Section</strong> / <strong>Specialties Module</strong>, a <strong>Status: Inactive</strong> prevents new enrollments. Reactivate only when the legal configuration is current and verified.</li>
+    </ul>
+    <div class="callout note">
+      <span class="tag">📌 Note</span>
+      Always keep the <strong>Program Manager</strong> name and <strong>signature</strong> up to date in each
+      license — they are printed on certificates and must correspond to the currently responsible person.
+    </div>
+  </section>
+
+  <footer>
+    <div class="support">
+      <strong>📞 Support</strong><br>
+      For additional assistance, contact our support team through your usual institutional channel.
+    </div>
+    &copy; RECS — Regulatory Education &amp; Certification System. Integrated Training, Management &amp; Certification Platform.<br>
+    Internal operational document.
+  </footer>
+
+</div>
+</body>
+</html>
