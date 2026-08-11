@@ -266,7 +266,7 @@ export default function MarcoDuquePage() {
                 shlomo.us →
               </a>
               <a
-                href="/recs/manual/en/index.html"
+                href="/recs/manual/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-ink transition-colors duration-200"
