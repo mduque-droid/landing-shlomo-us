@@ -18,6 +18,7 @@
     --ok:          #2f8a4c;
     --ok-bg:       #eef6f0;
     --ok-border:   #bfe0c8;
+    --warn-br:     #c9822a;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -107,6 +108,160 @@
   footer a { color: var(--brand-light); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
+  /* ── Reportes "por dentro" ── */
+  .rep-grid { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; margin-top: 24px; }
+  @media (max-width: 720px) { .rep-grid { grid-template-columns: 1fr; } }
+  .rep-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 20px 18px; box-shadow: 0 2px 10px rgba(26,58,92,.05); }
+  .rep-card h3 { margin: 0 0 4px; font-size: 15px; color: var(--brand); }
+  .rep-card .rep-sub { font-size: 13px; color: var(--muted); margin: 0 0 6px; line-height: 1.5; }
+  .rep-badge { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 20px; letter-spacing: .4px; vertical-align: middle; margin-left: 6px; }
+  .badge-dob { background: #fdeaea; color: #b5322f; border: 1px solid #f2c4c2; }
+  .badge-op  { background: #e8f1fb; color: #245b8c; border: 1px solid #c4dcf1; }
+
+  .chart { margin: 12px 0 2px; padding: 14px 16px 16px; background: #fbfcfe; border: 1px solid var(--border); border-radius: 8px; }
+  .chart-title { font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); font-weight: 700; margin-bottom: 14px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 4px; font-size: 12px; color: var(--text); }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; flex: none; }
+
+  .hbars { display: flex; flex-direction: column; gap: 10px; }
+  .hbar { display: grid; grid-template-columns: 84px 1fr 60px; align-items: center; gap: 10px; font-size: 12.5px; }
+  .hbar .track { background: #e7edf4; border-radius: 5px; height: 14px; overflow: hidden; }
+  .hbar .fill { height: 100%; border-radius: 5px; background: var(--brand-light); }
+  .hbar .fill.done { background: var(--ok); }
+  .hbar .val { font-size: 11.5px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+  .cols { display: flex; align-items: flex-end; gap: 10px; height: 116px; position: relative; }
+  .cols .col { flex: 1; display: flex; align-items: flex-end; justify-content: center; height: 100%; }
+  .cols .col .bar { width: 58%; background: var(--brand-light); border-radius: 4px 4px 0 0; position: relative; }
+  .cols .col .bar.hit { background: var(--warn-br); }
+  .cols .col .bar .cap-v { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--muted); white-space: nowrap; }
+  .cols .limit { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--warn-br); }
+  .cols .limit span { position: absolute; right: 2px; top: -15px; font-size: 10px; color: var(--warn-br); font-weight: 700; background: #fbfcfe; padding: 0 4px; }
+  .col-labels { display: flex; gap: 10px; margin-top: 8px; }
+  .col-labels span { flex: 1; text-align: center; font-size: 10.5px; color: var(--muted); }
+
+  .donut-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .donut { flex: none; }
+
+  .doc-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .doc-head { background: var(--brand); color: #fff; font-size: 12.5px; font-weight: 600; padding: 9px 14px; }
+  .doc-check { list-style: none; margin: 0; padding: 8px 14px; }
+  .doc-check li { display: flex; align-items: center; gap: 11px; padding: 6px 0; font-size: 13px; border-bottom: 1px solid #eef2f6; }
+  .doc-check li:last-child { border-bottom: 0; }
+  .doc-check .ck { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+
+  .rep-more { text-align: center; margin-top: 26px; }
+  .rep-more a { display: inline-block; padding: 12px 26px; border-radius: 8px; background: var(--brand); color: #fff; font-size: 14px; font-weight: 600; text-decoration: none; transition: opacity .2s; }
+  .rep-more a:hover { opacity: .88; }
+
+  /* ── Categorías de reportes ── */
+  .rep-cat-head { display: flex; align-items: center; gap: 12px; margin: 34px 0 2px; }
+  .rep-cat-head .rc-icon { width: 36px; height: 36px; border-radius: 9px; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; flex: none; }
+  .rep-cat-head h3 { margin: 0; font-size: 18px; color: var(--brand); }
+  .rep-cat-head .rc-sub { font-size: 12.5px; color: var(--muted); }
+
+  /* embudo */
+  .funnel { display: flex; flex-direction: column; gap: 7px; }
+  .funnel .frow { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+  .funnel .flabel { width: 92px; color: var(--muted); flex: none; }
+  .funnel .ftrack { flex: 1; display: flex; }
+  .funnel .fbar { height: 26px; border-radius: 5px; background: var(--brand-light); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 11.5px; min-width: 34px; }
+  .funnel .fbar.b2 { background: #3d6f9a; } .funnel .fbar.b3 { background: var(--ok); } .funnel .fbar.b4 { background: var(--warn-br); }
+  .funnel .fval { width: 46px; text-align: right; color: var(--muted); flex: none; font-variant-numeric: tabular-nums; }
+
+  /* línea de tiempo de sesión */
+  .tl { position: relative; padding: 20px 6px 4px; }
+  .tl .tl-line { position: absolute; left: 6px; right: 6px; top: 26px; height: 3px; background: #e7edf4; border-radius: 2px; }
+  .tl .tl-dots { position: relative; display: flex; justify-content: space-between; }
+  .tl .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--ok); border: 2px solid #fff; box-shadow: 0 0 0 1px var(--ok); }
+  .tl .dot.warn { background: var(--warn-br); box-shadow: 0 0 0 1px var(--warn-br); }
+  .tl .tl-labels { display: flex; justify-content: space-between; margin-top: 9px; font-size: 10px; color: var(--muted); }
+
+  /* panel en vivo */
+  .live { display: flex; flex-wrap: wrap; gap: 12px; }
+  .live .lcard { flex: 1 1 120px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .live .lcard .lv { font-size: 24px; font-weight: 800; color: var(--brand); display: flex; align-items: center; gap: 8px; line-height: 1; }
+  .live .lcard .ll { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+  .live .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(47,138,76,.5); } 70% { box-shadow: 0 0 0 8px rgba(47,138,76,0); } 100% { box-shadow: 0 0 0 0 rgba(47,138,76,0); } }
+
+  /* reporte a medida */
+  .rep-custom { margin-top: 24px; background: #fff8ec; border: 1px solid #f2dcaa; border-left: 4px solid var(--accent); border-radius: 8px; padding: 16px 18px; font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .rep-custom strong { color: var(--brand); }
+
+  /* score de confianza */
+  .score-wrap { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .score-ring { flex: none; position: relative; width: 108px; height: 108px; }
+  .score-ring .sr-num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-ring .sr-num b { font-size: 27px; font-weight: 800; color: var(--brand); line-height: 1; }
+  .score-ring .sr-num span { font-size: 8.5px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-top: 3px; }
+  .score-bre { flex: 1 1 180px; }
+  .sbrow { display: grid; grid-template-columns: 92px 1fr 30px; align-items: center; gap: 9px; font-size: 12px; margin: 7px 0; }
+  .sbrow .slabel { color: var(--muted); }
+  .sbrow .st { background: #e7edf4; height: 8px; border-radius: 4px; overflow: hidden; }
+  .sbrow .sf { height: 100%; background: var(--ok); border-radius: 4px; }
+  .sbrow .sv { text-align: right; color: var(--ok); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* rastro inmutable (hash encadenado) */
+  .ledger { display: flex; flex-direction: column; }
+  .lrow { display: flex; gap: 11px; }
+  .lnode { display: flex; flex-direction: column; align-items: center; }
+  .lnode .ldot { width: 12px; height: 12px; border-radius: 3px; background: var(--brand-light); flex: none; margin-top: 2px; }
+  .lnode .lline { width: 2px; flex: 1; background: #dbe3ec; min-height: 12px; }
+  .lrow:last-child .lline { display: none; }
+  .lbody { padding-bottom: 13px; }
+  .lbody .lt { font-size: 12.5px; color: var(--text); font-weight: 600; }
+  .lbody .lmeta { font-size: 10.5px; color: var(--faint); margin-top: 1px; }
+  .lbody .lh { font-family: "SFMono-Regular", Consolas, monospace; font-size: 10px; color: var(--brand-light); background: #eef3f8; padding: 1px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+  .lseal { margin-top: 4px; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ok); font-weight: 700; }
+
+  /* emisiones bloqueadas */
+  .xtable { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .xtable th { text-align: left; color: var(--muted); font-weight: 600; font-size: 10.5px; text-transform: uppercase; letter-spacing: .4px; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .xtable td { padding: 9px 8px; border-bottom: 1px solid #eef2f6; vertical-align: middle; }
+  .xtable tr:last-child td { border-bottom: none; }
+  .xbadge { font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+  .xbadge.block { background: #fdeaea; color: #b5322f; border: 1px solid #f2c4c2; }
+  .xbadge.ok { background: #eef6f0; color: var(--ok); border: 1px solid var(--ok-border); }
+
+  /* ── Prueba social ── */
+  .trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 34px; margin-top: 18px; }
+  .trust .tstat { text-align: center; }
+  .trust .tstat .v { font-size: 24px; font-weight: 800; color: var(--brand); display: block; line-height: 1.1; }
+  .trust .tstat .l { font-size: 12px; color: var(--muted); }
+
+  /* ── Certificado QR ── */
+  .cert-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 30px; margin-top: 20px; }
+  .cert-copy { flex: 1 1 300px; }
+  .cert-mock { flex: none; width: 300px; max-width: 100%; margin: 0 auto; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 6px 20px rgba(26,58,92,.12); background: #fff; }
+  .cert-mock .cert-top { background: linear-gradient(135deg, var(--brand), var(--brand-light)); color: #fff; padding: 16px 18px; border-bottom: 4px solid var(--accent); }
+  .cert-mock .cert-top .ct-logo { font-size: 20px; font-weight: 800; letter-spacing: 4px; }
+  .cert-mock .cert-top .ct-sub { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: .85; }
+  .cert-mock .cert-body { padding: 16px 18px; }
+  .cert-mock .cert-body .cb-label { font-size: 10px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); }
+  .cert-mock .cert-body .cb-name { font-size: 18px; font-weight: 700; color: var(--text); margin: 2px 0 10px; }
+  .cert-mock .cert-body .cb-row { font-size: 12.5px; color: var(--muted); margin: 3px 0; }
+  .cert-mock .cert-foot { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-top: 1px solid var(--border); background: #fbfcfe; }
+  .cert-mock .cert-foot .qr { flex: none; }
+  .cert-mock .cert-foot .qr-note { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* ── Cómo empezamos ── */
+  .steps { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-top: 22px; counter-reset: step; }
+  @media (max-width: 720px) { .steps { grid-template-columns: 1fr; } }
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 20px; position: relative; }
+  .step::before { counter-increment: step; content: counter(step); position: absolute; top: -14px; left: 20px; width: 30px; height: 30px; background: var(--accent); color: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
+  .step h3 { margin: 10px 0 6px; font-size: 15px; color: var(--brand); }
+  .step p { font-size: 13.5px; color: var(--muted); margin: 0; line-height: 1.55; }
+
+  /* ── FAQ ── */
+  .faq details { border: 1px solid var(--border); border-radius: 8px; margin: 10px 0; background: var(--surface); overflow: hidden; }
+  .faq summary { cursor: pointer; padding: 14px 18px; font-weight: 600; color: var(--brand); font-size: 15px; list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; float: right; color: var(--accent); font-weight: 800; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { margin: 0; padding: 0 18px 16px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+
   @media print {
     body { background: #fff; font-size: 12px; }
     .section { box-shadow: none; page-break-inside: avoid; }
@@ -126,7 +281,7 @@
   trabajo está automatizado.</p>
   <div class="cover-stats">
     <div class="cover-stat"><span class="val">100%</span><span class="lbl">Cumplimiento por diseño</span></div>
-    <div class="cover-stat"><span class="val">10+</span><span class="lbl">Reportes listos para DOB</span></div>
+    <div class="cover-stat"><span class="val">10</span><span class="lbl">Reportes listos para DOB</span></div>
     <div class="cover-stat"><span class="val">0</span><span class="lbl">Verificaciones manuales</span></div>
     <div class="cover-stat"><span class="val">QR</span><span class="lbl">Certificados verificables</span></div>
   </div>
@@ -256,6 +411,261 @@
     </table>
   </div>
 
+  <!-- ── RECS por dentro ── -->
+  <div class="section">
+    <h2>Mire RECS por Dentro</h2>
+    <p>Cada acción en RECS —cada verificación de identidad, cada hora estudiada, cada certificado— genera
+    <strong>evidencia estructurada e inmutable</strong>. Con esa data construimos reportes que un LMS genérico no puede
+    fabricar, porque nunca capturó el dato. Estos son ejemplos en tres frentes:</p>
+
+    <!-- Cat 1 · Defensa de Auditoría -->
+    <div class="rep-cat-head">
+      <span class="rc-icon">&#128737;</span>
+      <div><h3>Defensa de Auditoría</h3><div class="rc-sub">Evidencia lista para el inspector, sin reconstruir nada.</div></div>
+    </div>
+    <div class="rep-grid">
+
+      <div class="rep-card">
+        <h3>Score de Confianza del Certificado <span class="rep-badge badge-dob">Obligatorio DOB</span></h3>
+        <p class="rep-sub">Un único índice que resume por qué el certificado es inimpugnable: combina identidad, horas, límite diario y evaluaciones en un solo número auditable.</p>
+        <div class="chart">
+          <div class="chart-title">Certificado SST-2026-00841 · Ana Ruiz</div>
+          <div class="score-wrap">
+            <div class="score-ring">
+              <svg viewBox="0 0 120 120" width="108" height="108">
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#e7edf4" stroke-width="12"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#2f8a4c" stroke-width="12" stroke-linecap="round" stroke-dasharray="289 289" transform="rotate(-90 60 60)"/>
+              </svg>
+              <div class="sr-num"><b>100</b><span>Confianza</span></div>
+            </div>
+            <div class="score-bre">
+              <div class="sbrow"><span class="slabel">Identidad</span><span class="st"><span class="sf" style="width:100%"></span></span><span class="sv">100</span></div>
+              <div class="sbrow"><span class="slabel">Horas</span><span class="st"><span class="sf" style="width:100%"></span></span><span class="sv">100</span></div>
+              <div class="sbrow"><span class="slabel">Límite diario</span><span class="st"><span class="sf" style="width:100%"></span></span><span class="sv">100</span></div>
+              <div class="sbrow"><span class="slabel">Evaluaciones</span><span class="st"><span class="sf" style="width:100%"></span></span><span class="sv">100</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rep-card">
+        <h3>Rastro de Auditoría Inmutable <span class="rep-badge badge-dob">Obligatorio DOB</span></h3>
+        <p class="rep-sub">Cada evento se sella con un hash encadenado al anterior. Si alguien alterara un solo registro, la cadena se rompe y se detecta al instante.</p>
+        <div class="chart">
+          <div class="chart-title">Cadena de eventos — expediente 00841</div>
+          <div class="ledger">
+            <div class="lrow">
+              <div class="lnode"><span class="ldot"></span><span class="lline"></span></div>
+              <div class="lbody"><div class="lt">Identidad verificada</div><div class="lmeta">12 Jun · 09:02:14</div><div class="lh">a1f9…c72e</div></div>
+            </div>
+            <div class="lrow">
+              <div class="lnode"><span class="ldot"></span><span class="lline"></span></div>
+              <div class="lbody"><div class="lt">40 h de estudio completadas</div><div class="lmeta">12 Jun · 11:07:41</div><div class="lh">b3c1…9d40</div></div>
+            </div>
+            <div class="lrow">
+              <div class="lnode"><span class="ldot"></span><span class="lline"></span></div>
+              <div class="lbody"><div class="lt">Instantánea de Validación congelada</div><div class="lmeta">12 Jun · 11:08:02</div><div class="lh">7e88…1af5</div></div>
+            </div>
+            <div class="lrow">
+              <div class="lnode"><span class="ldot"></span></div>
+              <div class="lbody"><div class="lt">Certificado emitido + QR</div><div class="lmeta">12 Jun · 11:08:03</div><div class="lh">f0d2…6bb9</div>
+                <div class="lseal">&#128274; Cadena íntegra · sin alteraciones</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rep-card">
+        <h3>Emisiones Bloqueadas por el Sistema <span class="rep-badge badge-dob">Obligatorio DOB</span></h3>
+        <p class="rep-sub">El "cumplimiento por diseño" en acción: RECS rechaza cualquier certificado que no cumpla un requisito legal —sin discreción humana ni anulaciones—.</p>
+        <div class="chart">
+          <div class="chart-title">Intentos de emisión bloqueados este mes</div>
+          <table class="xtable">
+            <thead><tr><th>Alumno</th><th>Requisito faltante</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>J. Pérez</td><td>Horas incompletas (32/40)</td><td><span class="xbadge block">Bloqueado</span></td></tr>
+              <tr><td>L. Díaz</td><td>Identidad sin verificar</td><td><span class="xbadge block">Bloqueado</span></td></tr>
+              <tr><td>M. Soto</td><td>Evaluación no aprobada</td><td><span class="xbadge block">Bloqueado</span></td></tr>
+              <tr><td>A. Ruiz</td><td>Todos los requisitos cumplidos</td><td><span class="xbadge ok">Emitido</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rep-card">
+        <h3>Línea de Tiempo de Verificación de Identidad <span class="rep-badge badge-dob">Obligatorio DOB</span></h3>
+        <p class="rep-sub">No solo verificamos al inicio: el reconocimiento facial se repite durante toda la sesión. Cada punto es una comprobación con marca de tiempo.</p>
+        <div class="chart">
+          <div class="chart-title">Sesión de estudio — Ana Ruiz · 12 Jun, 2 h 05 min</div>
+          <div class="tl">
+            <div class="tl-line"></div>
+            <div class="tl-dots">
+              <span class="dot" title="OK"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot warn" title="Reintento"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="tl-labels"><span>Ingreso</span><span>0:20</span><span>0:40</span><span>1:00</span><span>1:20</span><span>1:40</span><span>Cierre</span></div>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--ok)"></i> Verificación exitosa</span>
+            <span><i style="background:var(--warn-br)"></i> Reintento resuelto</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Cat 2 · Inteligencia de Negocio -->
+    <div class="rep-cat-head">
+      <span class="rc-icon">&#128200;</span>
+      <div><h3>Inteligencia de Negocio</h3><div class="rc-sub">Dónde crece, dónde pierde alumnos y dónde está el dinero.</div></div>
+    </div>
+    <div class="rep-grid">
+
+      <div class="rep-card">
+        <h3>Embudo de Finalización <span class="rep-badge badge-op">Operativo</span></h3>
+        <p class="rep-sub">De la inscripción al certificado: vea exactamente en qué etapa se estancan los alumnos y cuánto ingreso potencial está en riesgo.</p>
+        <div class="chart">
+          <div class="chart-title">Alumnos por etapa — último trimestre</div>
+          <div class="funnel">
+            <div class="frow"><span class="flabel">Inscritos</span><span class="ftrack"><span class="fbar" style="width:100%">100%</span></span><span class="fval">240</span></div>
+            <div class="frow"><span class="flabel">Estudiando</span><span class="ftrack"><span class="fbar b2" style="width:82%">82%</span></span><span class="fval">197</span></div>
+            <div class="frow"><span class="flabel">Certificados</span><span class="ftrack"><span class="fbar b3" style="width:68%">68%</span></span><span class="fval">163</span></div>
+            <div class="frow"><span class="flabel">Estancados</span><span class="ftrack"><span class="fbar b4" style="width:18%">18%</span></span><span class="fval">43</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rep-card">
+        <h3>Ingresos por Curso <span class="rep-badge badge-op">Operativo</span></h3>
+        <p class="rep-sub">Cobros por curso, especialidad o sub-escuela, conciliados con las facturas emitidas. Rentabilidad real por línea de negocio.</p>
+        <div class="chart">
+          <div class="chart-title">Ingresos cobrados por mes</div>
+          <div class="cols">
+            <div class="col"><div class="bar" style="height:43%"><span class="cap-v">$12k</span></div></div>
+            <div class="col"><div class="bar" style="height:54%"><span class="cap-v">$15k</span></div></div>
+            <div class="col"><div class="bar" style="height:50%"><span class="cap-v">$14k</span></div></div>
+            <div class="col"><div class="bar" style="height:75%"><span class="cap-v">$21k</span></div></div>
+            <div class="col"><div class="bar" style="height:68%"><span class="cap-v">$19k</span></div></div>
+            <div class="col"><div class="bar" style="height:93%"><span class="cap-v">$26k</span></div></div>
+          </div>
+          <div class="col-labels"><span>Ene</span><span>Feb</span><span>Mar</span><span>Abr</span><span>May</span><span>Jun</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Cat 3 · Cumplimiento en Vivo -->
+    <div class="rep-cat-head">
+      <span class="rc-icon">&#9889;</span>
+      <div><h3>Cumplimiento en Vivo</h3><div class="rc-sub">El sistema hace cumplir las reglas en tiempo real, solo.</div></div>
+    </div>
+    <div class="rep-grid">
+
+      <div class="rep-card">
+        <h3>Panel de Operación en Vivo <span class="rep-badge badge-op">Operativo</span></h3>
+        <p class="rep-sub">Qué está pasando ahora mismo en su plataforma: alumnos estudiando, verificaciones ocurriendo y certificados emitidos hoy.</p>
+        <div class="chart">
+          <div class="chart-title">Estado en tiempo real</div>
+          <div class="live">
+            <div class="lcard"><div class="lv"><span class="pulse"></span>38</div><div class="ll">Estudiando ahora</div></div>
+            <div class="lcard"><div class="lv">126</div><div class="ll">Verificaciones hoy</div></div>
+            <div class="lcard"><div class="lv">14</div><div class="ll">Certificados emitidos hoy</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rep-card">
+        <h3>Cumplimiento del Límite Diario de Horas <span class="rep-badge badge-dob">Obligatorio DOB</span></h3>
+        <p class="rep-sub">Las horas por día de cada alumno, con corte automático al llegar al tope. Prueba que nadie acumuló más de lo que la norma permite.</p>
+        <div class="chart">
+          <div class="chart-title">Horas de estudio por día — tope diario 8 h</div>
+          <div class="cols">
+            <div class="limit" style="bottom:80%"><span>Tope 8 h</span></div>
+            <div class="col"><div class="bar" style="height:60%"></div></div>
+            <div class="col"><div class="bar hit" style="height:80%"></div></div>
+            <div class="col"><div class="bar" style="height:70%"></div></div>
+            <div class="col"><div class="bar hit" style="height:80%"></div></div>
+            <div class="col"><div class="bar" style="height:50%"></div></div>
+            <div class="col"><div class="bar hit" style="height:80%"></div></div>
+          </div>
+          <div class="col-labels"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span></div>
+          <div class="legend">
+            <span><i style="background:var(--warn-br)"></i> Día que alcanzó el tope</span>
+            <span><i style="background:var(--brand-light)"></i> Día dentro del límite</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rep-custom">
+      &#128161; <strong>¿Necesita un reporte a medida?</strong> Su data ya está capturada de forma estructurada. Si el NYC DOB
+      o su operación requieren un formato específico, lo construimos sobre la misma base —sin migraciones ni integraciones nuevas—.
+    </div>
+
+    <div class="rep-more">
+      <a href="/recs/manual/es/#s4">Ver el catálogo completo de reportes →</a>
+    </div>
+  </div>
+
+  <!-- ── Certificado QR ── -->
+  <div class="section section-alt">
+    <h2>Certificados Que Se Verifican Solos</h2>
+    <div class="cert-wrap">
+      <div class="cert-copy">
+        <p>Cada certificado se emite como PDF con un <strong>código QR único</strong> y una
+        <strong>Instantánea de Validación</strong> que congela toda la evidencia en el momento de la emisión —para siempre.</p>
+        <p>Cualquier autoridad reguladora escanea el QR y confirma la autenticidad en segundos. Sin llamadas a su oficina,
+        sin registros que buscar, sin margen para falsificaciones.</p>
+        <ul class="checklist">
+          <li><span class="ck">✓</span><span>Folio único trazable a un expediente de auditoría completo.</span></li>
+          <li><span class="ck">✓</span><span>Evidencia inmutable: no se puede alterar después de emitido.</span></li>
+          <li><span class="ck">✓</span><span>Verificable por el DOB, un empleador o el propio titular.</span></li>
+        </ul>
+      </div>
+      <div class="cert-mock">
+        <div class="cert-top">
+          <div class="ct-logo">RECS</div>
+          <div class="ct-sub">Certificado de Finalización</div>
+        </div>
+        <div class="cert-body">
+          <div class="cb-label">Otorgado a</div>
+          <div class="cb-name">Ana Ruiz</div>
+          <div class="cb-row"><strong>Curso:</strong> Site Safety Training (SST) — 40 h</div>
+          <div class="cb-row"><strong>Licencia:</strong> NYC DOB · SST Worker</div>
+          <div class="cb-row"><strong>Emitido:</strong> 12 Jun 2026</div>
+          <div class="cb-row"><strong>Folio:</strong> SST-2026-00841</div>
+        </div>
+        <div class="cert-foot">
+          <svg class="qr" width="62" height="62" viewBox="0 0 62 62" shape-rendering="crispEdges">
+            <rect width="62" height="62" fill="#fff"/>
+            <g fill="#1a3a5c">
+              <rect x="4" y="4" width="16" height="16"/><rect x="8" y="8" width="8" height="8" fill="#fff"/>
+              <rect x="42" y="4" width="16" height="16"/><rect x="46" y="8" width="8" height="8" fill="#fff"/>
+              <rect x="4" y="42" width="16" height="16"/><rect x="8" y="46" width="8" height="8" fill="#fff"/>
+              <rect x="26" y="6" width="4" height="4"/><rect x="34" y="6" width="4" height="4"/>
+              <rect x="26" y="14" width="4" height="4"/><rect x="24" y="24" width="4" height="4"/>
+              <rect x="32" y="24" width="4" height="4"/><rect x="40" y="26" width="4" height="4"/>
+              <rect x="48" y="26" width="4" height="4"/><rect x="6" y="26" width="4" height="4"/>
+              <rect x="14" y="26" width="4" height="4"/><rect x="26" y="32" width="4" height="4"/>
+              <rect x="26" y="40" width="4" height="4"/><rect x="34" y="34" width="4" height="4"/>
+              <rect x="42" y="40" width="4" height="4"/><rect x="50" y="42" width="4" height="4"/>
+              <rect x="34" y="48" width="4" height="4"/><rect x="42" y="50" width="4" height="4"/>
+              <rect x="50" y="50" width="4" height="4"/><rect x="26" y="50" width="4" height="4"/>
+            </g>
+          </svg>
+          <div class="qr-note">Escanee para verificar la autenticidad ante el regulador.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Qué Obtiene ── -->
   <div class="section">
     <h2>Qué Obtiene</h2>
@@ -269,6 +679,54 @@
       <li><span class="ck">✓</span><span>Arquitectura multi-tenant que soporta múltiples sub-escuelas, gestores de programa y tipos de licencias desde un único panel.</span></li>
       <li><span class="ck">✓</span><span>Documentación operativa completa en inglés y español para su personal no técnico.</span></li>
     </ul>
+  </div>
+
+  <!-- ── Cómo empezamos ── -->
+  <div class="section">
+    <h2>Cómo Empezamos</h2>
+    <p>Nosotros nos encargamos de la implementación completa. Usted recibe una plataforma operativa,
+    configurada a sus licencias, sin tocar una línea de código.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Diagnóstico</h3>
+        <p>Revisamos sus licencias, requisitos DOB y flujos actuales. Definimos juntos las reglas de cumplimiento que el sistema hará cumplir.</p>
+      </div>
+      <div class="step">
+        <h3>Configuración</h3>
+        <p>Configuramos cursos, especialidades, Active Proctoring, reportes y certificados según su normativa. Cargamos su catálogo y su equipo.</p>
+      </div>
+      <div class="step">
+        <h3>Operación</h3>
+        <p>Capacitamos a su personal con documentación en español e inglés, y usted empieza a certificar. Nosotros damos soporte continuo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div class="section">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="faq">
+      <details>
+        <summary>¿Los certificados son legalmente válidos ante el DOB?</summary>
+        <p>Sí. RECS solo emite un certificado cuando cada requisito legal configurado está verificablemente cumplido —horas, identidad, evaluaciones e inscripción—. La Instantánea de Validación congela toda la evidencia en el momento de la emisión, de forma inmutable, lista para cualquier auditoría.</p>
+      </details>
+      <details>
+        <summary>¿Qué licencias y programas soporta?</summary>
+        <p>La arquitectura multi-tenant soporta múltiples licencias, especialidades, cursos y sub-escuelas desde un único panel. Las reglas de cumplimiento se configuran una vez por licencia y el sistema las aplica automáticamente en todos los programas.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda la implementación?</summary>
+        <p>Depende del número de licencias y del tamaño del catálogo, pero la plataforma se entrega ya configurada y operativa. El proceso es Diagnóstico → Configuración → Operación, y Shlomo se encarga de todo el trabajo técnico.</p>
+      </details>
+      <details>
+        <summary>¿Los datos de mi organización son míos?</summary>
+        <p>Sí. Sus estudiantes, certificados y expedientes de auditoría le pertenecen y son exportables en PDF o planilla en cualquier momento. Nada queda cautivo de la plataforma.</p>
+      </details>
+      <details>
+        <summary>¿Necesito personal técnico para operarlo?</summary>
+        <p>No. RECS está diseñado para personal no técnico e incluye documentación operativa completa en español e inglés. Su equipo administra, dicta y certifica desde una interfaz simple.</p>
+      </details>
+    </div>
   </div>
 
   <!-- ── CTA ── -->
