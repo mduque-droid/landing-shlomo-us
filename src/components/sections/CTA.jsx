@@ -5,8 +5,9 @@ const CTA = ({ data, onContactClick }) => {
   const whatsappUrl = `https://wa.me/${data.whatsappNumber}?text=${encodeURIComponent(data.whatsappMessage)}`;
 
   return (
-    <section id="cta" className="bg-ink text-white">
-      <Container className="py-24 sm:py-32">
+    <section id="cta" className="relative overflow-hidden bg-ink text-white">
+      <div className="cta-glow" aria-hidden="true" />
+      <Container className="relative z-10 py-24 sm:py-32">
         <div className="max-w-3xl">
           <span className="text-sm font-medium text-accent">Contact</span>
           <h2 className="mt-4 text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-white sm:text-5xl">

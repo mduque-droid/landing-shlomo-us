@@ -1,4 +1,5 @@
 import Container from '../layout/Container';
+import UsFlag from '../atomic/UsFlag';
 import logo from '../../assets/shlomo-logo.png';
 
 const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
@@ -14,7 +15,7 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
             <img
               src={logo}
               alt="Shlomo Software Solutions"
-              className="h-11 w-auto"
+              className="h-9 w-auto"
             />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
               {company.tagline}
@@ -76,15 +77,15 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
 
         {/* Bottom */}
         <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-faint">
-            © {footer.year} {footer.copyright}. All rights reserved.
-          </p>
+          <div className="flex items-center gap-3">
+            <UsFlag className="rounded-[2px] ring-1 ring-line" />
+            <p className="text-xs text-faint">
+              © {footer.year} {footer.copyright}. Proudly based in the USA.
+            </p>
+          </div>
           <div className="flex gap-6 text-sm">
             <a href={company.linkedin} target="_blank" rel="noopener noreferrer" className={linkClasses}>
               LinkedIn
-            </a>
-            <a href={company.github} target="_blank" rel="noopener noreferrer" className={linkClasses}>
-              GitHub
             </a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className={linkClasses}>
               WhatsApp

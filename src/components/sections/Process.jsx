@@ -7,7 +7,7 @@ const Step = ({ item, index, isLast }) => {
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? 'is-visible' : ''} relative`}
+      className={`reveal ${visible ? 'is-visible' : ''} group relative`}
       style={{ transitionDelay: `${index * 90}ms` }}
     >
       {/* Connector line to the next step (desktop only) */}
@@ -18,7 +18,7 @@ const Step = ({ item, index, isLast }) => {
         />
       )}
 
-      <div className="relative flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-surface font-mono text-sm font-semibold text-accent">
+      <div className="relative flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-surface font-mono text-sm font-semibold text-accent transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:border-accent group-hover:bg-accent group-hover:text-white group-hover:shadow-[0_8px_20px_rgba(0,96,57,0.18)]">
         {item.step}
       </div>
       <h3 className="mt-5 text-base font-semibold text-ink">{item.title}</h3>

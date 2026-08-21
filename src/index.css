@@ -2,7 +2,7 @@
 
 /* ── Design tokens ───────────────────────────────────────────────────────
    Light editorial system. Max 3 colors: neutral paper, near-black ink,
-   a single restrained indigo accent. Everything else is hairlines + space. */
+   a single restrained green accent. Everything else is hairlines + space. */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
@@ -16,8 +16,8 @@
   --color-line: rgba(10, 10, 10, 0.08); /* hairlines */
   --color-line-strong: rgba(10, 10, 10, 0.16); /* hover hairlines */
 
-  --color-accent: #4f46e5; /* the single accent */
-  --color-accent-hover: #4338ca;
+  --color-accent: #006039; /* Rolex green (Pantone 341C) — the single accent */
+  --color-accent-hover: #004d2d;
 }
 
 @layer base {
@@ -67,5 +67,201 @@
     html {
       scroll-behavior: auto;
     }
+  }
+}
+
+/* ── Hero aurora backdrop (pure CSS) ─────────────────────────────────────
+   Soft, blurred green blobs that drift and breathe behind the headline.
+   Restrained: low opacity + heavy blur, sitting under the content layer.
+   Honors reduced-motion (blobs hold still). */
+@layer utilities {
+  .hero-aura {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    /* Gentle edge fade only — no aggressive cropping. */
+    -webkit-mask-image: radial-gradient(150% 140% at 50% 45%, #000 72%, transparent 100%);
+    mask-image: radial-gradient(150% 140% at 50% 45%, #000 72%, transparent 100%);
+  }
+
+  /* Vertical parallax: JS sets --aura-y from scroll; blobs keep their own
+     drift underneath. Subtle depth, never distracting. */
+  .hero-aura__inner {
+    position: absolute;
+    inset: 0;
+    transform: translate3d(0, var(--aura-y, 0px), 0);
+    will-change: transform;
+  }
+
+  .aura-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    will-change: transform, opacity;
+  }
+
+  /* Sober Rolex-green wash — visible but restrained. */
+  .aura-blob--1 {
+    width: 34rem;
+    height: 34rem;
+    top: -8rem;
+    left: -6rem;
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 96, 57, 0.34),
+      transparent 70%
+    );
+    animation: aura-drift-1 22s ease-in-out infinite;
+  }
+
+  .aura-blob--2 {
+    width: 28rem;
+    height: 28rem;
+    top: 2rem;
+    left: 34%;
+    background: radial-gradient(
+      circle at center,
+      rgba(6, 120, 74, 0.26),
+      transparent 70%
+    );
+    animation: aura-drift-2 26s ease-in-out infinite;
+  }
+
+  .aura-blob--3 {
+    width: 26rem;
+    height: 26rem;
+    bottom: -6rem;
+    right: -4rem;
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 80, 48, 0.30),
+      transparent 70%
+    );
+    animation: aura-drift-3 24s ease-in-out infinite;
+  }
+
+  @keyframes aura-drift-1 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.85; }
+    50% { transform: translate3d(4rem, 2.5rem, 0) scale(1.14); opacity: 1; }
+  }
+
+  @keyframes aura-drift-2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1.04); opacity: 0.7; }
+    50% { transform: translate3d(-3.5rem, 3rem, 0) scale(1); opacity: 0.92; }
+  }
+
+  @keyframes aura-drift-3 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.75; }
+    50% { transform: translate3d(-3.5rem, -3rem, 0) scale(1.12); opacity: 0.95; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aura-blob {
+      animation: none;
+    }
+    .hero-aura__inner {
+      transform: none;
+    }
+  }
+}
+
+/* ── Hero headline sheen (one-time, on load) ─────────────────────────────
+   A single soft light sweep across the H1 — a senior 'wow' that fires once
+   and never loops. Honors reduced-motion (no sweep). */
+@layer utilities {
+  .hero-title {
+    position: relative;
+  }
+
+  .hero-title::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      color-mix(in srgb, var(--color-accent) 22%, transparent) 48%,
+      rgba(255, 255, 255, 0.55) 52%,
+      transparent 70%
+    );
+    background-size: 220% 100%;
+    background-position: 180% 0;
+    mix-blend-mode: soft-light;
+    opacity: 0;
+    animation: hero-sheen 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.55s 1 both;
+  }
+
+  @keyframes hero-sheen {
+    0% { background-position: 180% 0; opacity: 0; }
+    15% { opacity: 1; }
+    100% { background-position: -60% 0; opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title::after {
+      animation: none;
+      display: none;
+    }
+  }
+}
+
+/* ── Icon self-draw ──────────────────────────────────────────────────────
+   When a card enters the viewport, its line-icon draws itself in (stroke
+   dash sweep). Fires once via the `.icon-draw` class toggled on reveal. */
+@layer utilities {
+  .icon-line svg :is(path, polyline, polygon, line, circle, rect) {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+  }
+
+  .icon-line.icon-draw svg :is(path, polyline, polygon, line, circle, rect) {
+    animation: icon-draw 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes icon-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .icon-line svg :is(path, polyline, polygon, line, circle, rect) {
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* ── CTA glow ────────────────────────────────────────────────────────────
+   A slow, soft green glow behind the dark CTA — quiet closing 'wow'. */
+@layer utilities {
+  .cta-glow {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .cta-glow::before {
+    content: "";
+    position: absolute;
+    width: 40rem;
+    height: 40rem;
+    left: 8%;
+    bottom: -22rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle at center, rgba(0, 150, 90, 0.28), transparent 68%);
+    filter: blur(40px);
+    animation: cta-pulse 9s ease-in-out infinite;
+  }
+
+  @keyframes cta-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.12); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow::before { animation: none; }
   }
 }

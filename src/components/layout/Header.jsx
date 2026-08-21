@@ -16,7 +16,7 @@ const Header = ({ navigation, onCTAClick }) => {
           <img
             src={logo}
             alt="Shlomo Software Solutions"
-            className="h-10 w-auto"
+            className="h-7 w-auto sm:h-8"
           />
         </a>
 

@@ -1,6 +1,6 @@
 const Card = ({ children, className = '', hover = true }) => {
   const hoverClass = hover
-    ? 'hover:border-line-strong hover:shadow-[0_8px_30px_rgba(10,10,10,0.06)]'
+    ? 'group hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_14px_40px_rgba(0,96,57,0.10)]'
     : '';
 
   return (
