@@ -1,10 +1,9 @@
+import { scrollToSection } from '../../utils/scroll';
+
 const Navigation = ({ items }) => {
   const handleSmoothScroll = (e, href) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(href);
   };
 
   return (
