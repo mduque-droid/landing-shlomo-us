@@ -4,21 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Operations Manual — RECS</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brand:        #1a3a5c;
-    --brand-light:  #2c5f8a;
-    --accent:       #c9a227;
-    --bg:           #f4f6f9;
+    --brand:        #0a0a0a;
+    --brand-light:  #006039;
+    --accent:       #006039;
+    --dark-1: #0a0a0a;
+    --dark-2: #1c1c1c;
+    --on-dark: #4cc38a;
+    --bg:           #fafaf9;
     --surface:      #ffffff;
-    --text:         #24303b;
-    --muted:        #5b6b7a;
-    --border:       #dfe5ec;
-    --note-bg:      #eaf3fb;
-    --note-br:      #2c5f8a;
+    --text:         #171717;
+    --muted:        #565660;
+    --border:       #e7e7e4;
+    --note-bg:      #eef5f1;
+    --note-br:      #006039;
     --warn-bg:      #fdf3e7;
     --warn-br:      #c9822a;
-    --ok:           #2f8a4c;
+    --ok:           #006039;
   }
 
   * { box-sizing: border-box; }
@@ -26,7 +33,8 @@
 
   body {
     margin: 0;
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
     background: var(--bg);
     color: var(--text);
     line-height: 1.65;
@@ -36,7 +44,7 @@
   .wrap { max-width: 950px; margin: 0 auto; padding: 0 20px 80px; }
 
   header.cover {
-    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+    background: linear-gradient(135deg, var(--dark-1) 0%, var(--dark-2) 100%);
     color: #fff;
     padding: 60px 20px 50px;
     text-align: center;
@@ -48,12 +56,12 @@
   header.cover p.subtitle { margin: 4px 0 0; font-size: 17px; opacity: .92; }
   .cover-meta { margin-top: 26px; display: inline-flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center; font-size: 13px; opacity: .9; }
   .cover-built-by { margin-top: 18px; font-size: 12px; opacity: .75; letter-spacing: .5px; }
-  .cover-built-by a { color: var(--accent); text-decoration: none; font-weight: 600; opacity: 1; }
+  .cover-built-by a { color: var(--on-dark); text-decoration: none; font-weight: 600; opacity: 1; }
   .cover-built-by a:hover { text-decoration: underline; }
   .cover-lang { margin-top: 14px; font-size: 12px; opacity: .7; }
   .cover-lang a { color: #fff; text-decoration: underline; opacity: .8; }
   .cover-lang a:hover { opacity: 1; }
-  .cover-meta span b { color: var(--accent); font-weight: 600; }
+  .cover-meta span b { color: var(--on-dark); font-weight: 600; }
 
   nav.toc { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 28px; margin: 34px 0; box-shadow: 0 2px 10px rgba(26,58,92,.05); }
   nav.toc h2 { margin: 0 0 12px; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; color: var(--brand); border: 0; padding: 0; }
@@ -76,7 +84,7 @@
   table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 15px; }
   th, td { text-align: left; padding: 11px 14px; border: 1px solid var(--border); vertical-align: top; }
   thead th { background: var(--brand); color: #fff; font-weight: 600; }
-  tbody tr:nth-child(even) { background: #f7f9fc; }
+  tbody tr:nth-child(even) { background: #f7f7f5; }
   tbody tr:hover { background: var(--note-bg); }
 
   .callout { border-radius: 8px; padding: 14px 18px 14px 16px; margin: 18px 0; border-left: 5px solid; font-size: 15px; }
@@ -87,7 +95,7 @@
   .warn .tag    { color: var(--warn-br); }
 
   pre.tree { background: #10202f; color: #d6e2ee; padding: 20px 24px; border-radius: 8px; overflow-x: auto; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 14px; line-height: 1.6; border-left: 4px solid var(--accent); }
-  pre.tree .hl { color: var(--accent); font-weight: 600; }
+  pre.tree .hl { color: var(--on-dark); font-weight: 600; }
 
   .ok  { color: var(--ok); font-weight: 700; }
 
@@ -104,7 +112,7 @@
   .report { margin: 28px 0; }
   .report p { margin: 6px 0; }
 
-  .chart { margin: 14px 0 4px; padding: 16px 18px 18px; background: #fbfcfe; border: 1px solid var(--border); border-radius: 8px; }
+  .chart { margin: 14px 0 4px; padding: 16px 18px 18px; background: #fbfbfa; border: 1px solid var(--border); border-radius: 8px; }
   .chart-title { font-size: 12px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); font-weight: 700; margin-bottom: 16px; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 4px; font-size: 12.5px; color: var(--text); }
   .legend span { display: inline-flex; align-items: center; gap: 7px; }
@@ -112,7 +120,7 @@
 
   .hbars { display: flex; flex-direction: column; gap: 11px; }
   .hbar { display: grid; grid-template-columns: 120px 1fr 66px; align-items: center; gap: 12px; font-size: 13px; }
-  .hbar .track { background: #e7edf4; border-radius: 5px; height: 15px; overflow: hidden; }
+  .hbar .track { background: #ececea; border-radius: 5px; height: 15px; overflow: hidden; }
   .hbar .fill { height: 100%; border-radius: 5px; background: var(--brand-light); }
   .hbar .fill.done { background: var(--ok); }
   .hbar .val { font-size: 12px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
@@ -123,7 +131,7 @@
   .cols .col .bar.hit { background: var(--warn-br); }
   .cols .col .bar .cap-v { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
   .cols .limit { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--warn-br); }
-  .cols .limit span { position: absolute; right: 2px; top: -15px; font-size: 10.5px; color: var(--warn-br); font-weight: 700; background: #fbfcfe; padding: 0 4px; }
+  .cols .limit span { position: absolute; right: 2px; top: -15px; font-size: 10.5px; color: var(--warn-br); font-weight: 700; background: #fbfbfa; padding: 0 4px; }
   .col-labels { display: flex; gap: 12px; margin-top: 8px; }
   .col-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--muted); }
 
@@ -487,12 +495,12 @@
         <div class="chart-title">Identity verifications for the period</div>
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="92% successful verifications">
-            <circle cx="60" cy="60" r="42" fill="none" stroke="#2f8a4c" stroke-width="16" stroke-dasharray="242.8 21.1" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#006039" stroke-width="16" stroke-dasharray="242.8 21.1" transform="rotate(-90 60 60)"/>
             <circle cx="60" cy="60" r="42" fill="none" stroke="#c9822a" stroke-width="16" stroke-dasharray="21.1 242.8" stroke-dashoffset="-242.8" transform="rotate(-90 60 60)"/>
             <text x="60" y="60" text-anchor="middle" dominant-baseline="central" font-size="21" font-weight="700" fill="#24303b">92%</text>
           </svg>
           <div class="legend" style="flex-direction:column; gap:9px">
-            <span><i style="background:#2f8a4c"></i> Successful verifications — 92%</span>
+            <span><i style="background:#006039"></i> Successful verifications — 92%</span>
             <span><i style="background:#c9822a"></i> Retries / identity failures — 8%</span>
           </div>
         </div>
@@ -531,12 +539,12 @@
         <div class="chart-title">Identity documents by status</div>
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="78% approved documents">
-            <circle cx="60" cy="60" r="42" fill="none" stroke="#2f8a4c" stroke-width="16" stroke-dasharray="205.8 58.1" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#006039" stroke-width="16" stroke-dasharray="205.8 58.1" transform="rotate(-90 60 60)"/>
             <circle cx="60" cy="60" r="42" fill="none" stroke="#c9822a" stroke-width="16" stroke-dasharray="39.6 224.3" stroke-dashoffset="-205.8" transform="rotate(-90 60 60)"/>
             <circle cx="60" cy="60" r="42" fill="none" stroke="#b5322f" stroke-width="16" stroke-dasharray="18.5 245.4" stroke-dashoffset="-245.4" transform="rotate(-90 60 60)"/>
           </svg>
           <div class="legend" style="flex-direction:column; gap:9px">
-            <span><i style="background:#2f8a4c"></i> Approved — 78%</span>
+            <span><i style="background:#006039"></i> Approved — 78%</span>
             <span><i style="background:#c9822a"></i> Pending review — 15%</span>
             <span><i style="background:#b5322f"></i> Rejected — 7%</span>
           </div>
@@ -574,13 +582,13 @@
         <div class="chart-title">New enrollments per month</div>
         <svg viewBox="0 0 320 130" style="width:100%; height:auto" role="img" aria-label="Enrollment trend">
           <polygon points="20,65 78,52 136,57 194,38 252,42 300,23 300,95 20,95" fill="#dce9f5"/>
-          <polyline points="20,65 78,52 136,57 194,38 252,42 300,23" fill="none" stroke="#2c5f8a" stroke-width="2.5"/>
-          <circle cx="20" cy="65" r="3.2" fill="#2c5f8a"/>
-          <circle cx="78" cy="52" r="3.2" fill="#2c5f8a"/>
-          <circle cx="136" cy="57" r="3.2" fill="#2c5f8a"/>
-          <circle cx="194" cy="38" r="3.2" fill="#2c5f8a"/>
-          <circle cx="252" cy="42" r="3.2" fill="#2c5f8a"/>
-          <circle cx="300" cy="23" r="3.2" fill="#2c5f8a"/>
+          <polyline points="20,65 78,52 136,57 194,38 252,42 300,23" fill="none" stroke="#006039" stroke-width="2.5"/>
+          <circle cx="20" cy="65" r="3.2" fill="#006039"/>
+          <circle cx="78" cy="52" r="3.2" fill="#006039"/>
+          <circle cx="136" cy="57" r="3.2" fill="#006039"/>
+          <circle cx="194" cy="38" r="3.2" fill="#006039"/>
+          <circle cx="252" cy="42" r="3.2" fill="#006039"/>
+          <circle cx="300" cy="23" r="3.2" fill="#006039"/>
           <g font-size="10" fill="#5b6b7a" text-anchor="middle">
             <text x="20" y="112">Jan</text>
             <text x="78" y="112">Feb</text>
@@ -621,14 +629,14 @@
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="Training status distribution">
             <circle cx="60" cy="60" r="42" fill="none" stroke="#9aa8b5" stroke-width="16" stroke-dasharray="47.5 216.4" transform="rotate(-90 60 60)"/>
-            <circle cx="60" cy="60" r="42" fill="none" stroke="#2c5f8a" stroke-width="16" stroke-dasharray="89.7 174.2" stroke-dashoffset="-47.5" transform="rotate(-90 60 60)"/>
-            <circle cx="60" cy="60" r="42" fill="none" stroke="#2f8a4c" stroke-width="16" stroke-dasharray="105.6 158.3" stroke-dashoffset="-137.2" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#006039" stroke-width="16" stroke-dasharray="89.7 174.2" stroke-dashoffset="-47.5" transform="rotate(-90 60 60)"/>
+            <circle cx="60" cy="60" r="42" fill="none" stroke="#006039" stroke-width="16" stroke-dasharray="105.6 158.3" stroke-dashoffset="-137.2" transform="rotate(-90 60 60)"/>
             <circle cx="60" cy="60" r="42" fill="none" stroke="#c9822a" stroke-width="16" stroke-dasharray="21.1 242.8" stroke-dashoffset="-242.8" transform="rotate(-90 60 60)"/>
           </svg>
           <div class="legend" style="flex-direction:column; gap:9px">
             <span><i style="background:#9aa8b5"></i> Not started — 18%</span>
-            <span><i style="background:#2c5f8a"></i> In progress — 34%</span>
-            <span><i style="background:#2f8a4c"></i> Completed — 40%</span>
+            <span><i style="background:#006039"></i> In progress — 34%</span>
+            <span><i style="background:#006039"></i> Completed — 40%</span>
             <span><i style="background:#c9822a"></i> Not passed — 8%</span>
           </div>
         </div>
