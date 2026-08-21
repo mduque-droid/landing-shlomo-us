@@ -11,15 +11,15 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <img src={logo} alt="Shlomo" className="h-7 w-auto" />
-              <span className="text-[15px] font-semibold tracking-[-0.01em] text-ink">
-                Shlomo
-              </span>
-            </div>
+            <img
+              src={logo}
+              alt="Shlomo Software Solutions"
+              className="h-11 w-auto"
+            />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
               {company.tagline}
             </p>
+            <p className="mt-3 text-xs text-faint">{company.region}</p>
           </div>
 
           {/* Company */}
@@ -29,7 +29,8 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
             </h4>
             <ul className="mt-5 space-y-3 text-sm">
               <li><a href="#services" className={linkClasses}>Services</a></li>
-              <li><a href="#portfolio" className={linkClasses}>Portfolio</a></li>
+              <li><a href="#solutions" className={linkClasses}>How we help</a></li>
+              <li><a href="#process" className={linkClasses}>Process</a></li>
               <li><a href="#features" className={linkClasses}>Why Shlomo</a></li>
             </ul>
           </div>
@@ -66,7 +67,7 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
                   onClick={onContactClick}
                   className="mt-1 inline-flex cursor-pointer items-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-accent-hover"
                 >
-                  Secure contact
+                  Book free audit
                 </button>
               </li>
             </ul>

@@ -8,7 +8,7 @@ const Features = ({ data }) => {
         <div className="max-w-2xl">
           <span className="text-sm font-medium text-accent">Why Shlomo</span>
           <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink sm:text-4xl">
-            The commitments behind every engagement
+            Why New York companies choose Shlomo
           </h2>
         </div>
 

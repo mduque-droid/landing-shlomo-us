@@ -12,11 +12,12 @@ const Header = ({ navigation, onCTAClick }) => {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between">
-        <a href="#" onClick={handleHome} className="flex items-center gap-2.5">
-          <img src={logo} alt="Shlomo" className="h-7 w-auto" />
-          <span className="text-[15px] font-semibold tracking-[-0.01em] text-ink">
-            Shlomo
-          </span>
+        <a href="#" onClick={handleHome} aria-label="Shlomo Software Solutions — home">
+          <img
+            src={logo}
+            alt="Shlomo Software Solutions"
+            className="h-10 w-auto"
+          />
         </a>
 
         <Navigation items={navigation} />

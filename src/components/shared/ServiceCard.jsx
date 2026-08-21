@@ -1,12 +1,8 @@
 import Card from '../atomic/Card';
 import { useReveal } from '../../hooks/useReveal';
 
-const ServiceCard = ({ service, index = 0, onShowModal }) => {
+const ServiceCard = ({ service, index = 0 }) => {
   const { ref, visible } = useReveal();
-
-  const handleShowModal = () => {
-    if (onShowModal) onShowModal(service.id);
-  };
 
   return (
     <div
@@ -29,19 +25,10 @@ const ServiceCard = ({ service, index = 0, onShowModal }) => {
         </p>
 
         <div className="mt-auto border-t border-line pt-5">
-          <p className="text-sm leading-relaxed text-ink">{service.benefit}</p>
-
-          {service.hasModal && (
-            <button
-              onClick={handleShowModal}
-              className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors duration-300"
-            >
-              See how it works
-              <span className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
-                →
-              </span>
-            </button>
-          )}
+          <p className="text-xs font-medium uppercase tracking-[0.14em] text-accent">
+            The outcome
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-ink">{service.benefit}</p>
         </div>
       </Card>
     </div>

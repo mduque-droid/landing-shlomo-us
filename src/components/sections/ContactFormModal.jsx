@@ -2,9 +2,9 @@ import { useRef, useState } from 'react';
 import * as openpgp from 'openpgp';
 import Modal from '../atomic/Modal';
 
-const INITIAL_FORM = { name: '', email: '', message: '' };
+const INITIAL_FORM = { name: '', email: '', challenge: '', message: '' };
 
-const ContactFormModal = ({ isOpen, onClose, pgpUrl }) => {
+const ContactFormModal = ({ isOpen, onClose, pgpUrl, challenges = [] }) => {
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
@@ -73,7 +73,7 @@ const ContactFormModal = ({ isOpen, onClose, pgpUrl }) => {
       {/* Header */}
       <div className="bg-slate-950 text-white p-6 flex items-center justify-between rounded-t-xl">
         <h2 id="contact-modal-title" className="text-xl font-bold">
-          Secure Contact
+          Book Your Free Tech Audit
         </h2>
         <button
           onClick={onClose}
@@ -104,7 +104,7 @@ const ContactFormModal = ({ isOpen, onClose, pgpUrl }) => {
 
         <div>
           <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
-            Email
+            Corporate email
           </label>
           <input
             id="email"
@@ -114,13 +114,36 @@ const ContactFormModal = ({ isOpen, onClose, pgpUrl }) => {
             onChange={handleChange}
             required
             className={inputClasses}
-            placeholder="your@email.com"
+            placeholder="you@yourcompany.com"
           />
         </div>
 
         <div>
+          <label htmlFor="challenge" className="block text-sm font-semibold text-slate-900 mb-2">
+            Main challenge
+          </label>
+          <select
+            id="challenge"
+            name="challenge"
+            value={formData.challenge}
+            onChange={handleChange}
+            required
+            className={inputClasses}
+          >
+            <option value="" disabled>
+              Select your main challenge…
+            </option>
+            {challenges.map((challenge) => (
+              <option key={challenge} value={challenge}>
+                {challenge}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
           <label htmlFor="message" className="block text-sm font-semibold text-slate-900 mb-2">
-            Message
+            Tell us a bit more
           </label>
           <textarea
             id="message"
@@ -151,7 +174,7 @@ const ContactFormModal = ({ isOpen, onClose, pgpUrl }) => {
           disabled={loading}
           className="w-full bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 font-semibold py-3 rounded-lg transition-colors duration-200"
         >
-          {loading ? 'Encrypting & Sending...' : 'Send Securely'}
+          {loading ? 'Encrypting & Sending...' : 'Request My Free Audit'}
         </button>
 
         <p className="text-xs text-gray-500 text-center">🔒 End-to-end encrypted with PGP</p>
