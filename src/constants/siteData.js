@@ -9,7 +9,6 @@ const siteData = Object.freeze({
     phone: "+1 (862) 403-7724",
     linkedin: "https://www.linkedin.com/in/marco-duque-860b45179/",
     github: "https://github.com/mduque-droid/landing-shlomo-us",
-    pgpUrl: "/shlomo-public-key.txt",
     whatsappNumber: "18624037724",
     whatsappMessage: "Hi Shlomo, I'd like to book a free 30-min tech audit. My main challenge is:",
   }),
@@ -141,8 +140,7 @@ const siteData = Object.freeze({
     description: "Book a free 30-minute tech audit. We'll review your cloud spend, licenses, and security — and show you exactly where you're losing money or exposed to risk.",
     button: "Book Your Free 30-Min Tech Audit",
     email: "hello@shlomo.us",
-    whatsappNumber: "18624037724",
-    whatsappMessage: "Hi Shlomo, I'd like to book a free 30-min tech audit. My main challenge is:",
+    // WhatsApp details live once in `company` — see buildWhatsAppUrl consumers.
   }),
 
   footer: Object.freeze({
@@ -164,15 +162,6 @@ const siteData = Object.freeze({
       content: "Welcome to Shlomo Software Solutions LLC. By accessing this website, you agree to comply with these Terms of Service. All content, code, architectures, and intellectual property displayed on this site are the exclusive property of Shlomo Software Solutions LLC and are protected by applicable copyright and trademark laws. Our services are provided 'as is' without warranties of any kind. Any legal disputes arising from the use of this site will be governed by the laws of the State of New York. Users agree not to reverse-engineer, decompile, or attempt to extract source code from our proprietary solutions.",
     }),
   }),
-
-  contactChallenges: Object.freeze([
-    "Cloud cost reduction (FinOps)",
-    "Unused / duplicate SaaS licenses",
-    "System & API integration",
-    "Cybersecurity assessment",
-    "NY SHIELD / NYDFS compliance",
-    "Something else",
-  ]),
 });
 
 export default siteData;

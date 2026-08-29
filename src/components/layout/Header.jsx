@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import Button from '../atomic/Button';
 import logo from '../../assets/shlomo-logo.png';
 
-const Header = ({ navigation, onCTAClick }) => {
+const Header = ({ navigation, email, whatsappUrl }) => {
   const handleHome = (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -24,13 +24,12 @@ const Header = ({ navigation, onCTAClick }) => {
 
         <div className="flex items-center gap-5">
           <a
-            href="#cta"
-            onClick={onCTAClick}
+            href={`mailto:${email}`}
             className="hidden sm:inline text-sm text-muted hover:text-ink transition-colors duration-300"
           >
-            hello@shlomo.us
+            {email}
           </a>
-          <Button size="sm" onClick={onCTAClick}>
+          <Button size="sm" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
             Contact
           </Button>
         </div>

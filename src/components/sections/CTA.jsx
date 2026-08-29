@@ -1,9 +1,7 @@
 import Container from '../layout/Container';
 import wppIcon from '../../assets/wpp-icon.png';
 
-const CTA = ({ data, onContactClick }) => {
-  const whatsappUrl = `https://wa.me/${data.whatsappNumber}?text=${encodeURIComponent(data.whatsappMessage)}`;
-
+const CTA = ({ data, whatsappUrl }) => {
   return (
     <section id="cta" className="relative overflow-hidden bg-ink text-white">
       <div className="cta-glow" aria-hidden="true" />
@@ -18,21 +16,14 @@ const CTA = ({ data, onContactClick }) => {
           </p>
 
           <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <button
-              onClick={onContactClick}
-              className="inline-flex cursor-pointer items-center justify-center rounded-md bg-accent px-6 py-3 text-base font-medium text-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-accent-hover"
-            >
-              {data.button}
-            </button>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              title="Chat on WhatsApp"
-              className="inline-flex items-center gap-2 rounded-md border border-white/15 px-5 py-3 text-sm font-medium text-white/80 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-white/40 hover:text-white"
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-base font-medium text-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-accent-hover"
             >
               <img src={wppIcon} alt="" className="h-4 w-4" />
-              WhatsApp
+              {data.button}
             </a>
           </div>
         </div>

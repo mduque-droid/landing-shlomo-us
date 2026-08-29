@@ -2,9 +2,8 @@ import Container from '../layout/Container';
 import UsFlag from '../atomic/UsFlag';
 import logo from '../../assets/shlomo-logo.png';
 
-const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
+const Footer = ({ company, footer, whatsappUrl, onLegalLinkClick }) => {
   const linkClasses = 'text-muted hover:text-ink transition-colors duration-300';
-  const whatsappUrl = `https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent(company.whatsappMessage)}`;
 
   return (
     <footer className="border-t border-line bg-paper">
@@ -64,12 +63,14 @@ const Footer = ({ company, footer, onLegalLinkClick, onContactClick }) => {
               <li><a href={`mailto:${company.email}`} className={linkClasses}>{company.email}</a></li>
               <li><a href={`tel:${company.phone}`} className={linkClasses}>{company.phone}</a></li>
               <li>
-                <button
-                  onClick={onContactClick}
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-1 inline-flex cursor-pointer items-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-accent-hover"
                 >
                   Book free audit
-                </button>
+                </a>
               </li>
             </ul>
           </div>
