@@ -1,9 +1,10 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import siteData from './constants/siteData';
 import { scrollToSection } from './utils/scroll';
-import useUiModals from './hooks/useUiModals';
+import { buildWhatsAppUrl } from './utils/whatsapp';
+import useLegalModal from './hooks/useLegalModal';
 import ErrorBoundary from './components/shared/ErrorBoundary';
-import MarcoDuquePage from './pages/MarcoDuque';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
 import Services from './components/sections/Services';
@@ -13,62 +14,66 @@ import Features from './components/sections/Features';
 import CTA from './components/sections/CTA';
 import Footer from './components/sections/Footer';
 import LegalModal from './components/atomic/LegalModal';
-import ContactFormModal from './components/sections/ContactFormModal';
+
+// Route-level code-split: the résumé page ships in its own chunk.
+const MarcoDuquePage = lazy(() => import('./pages/MarcoDuque'));
+
+// Single WhatsApp link for every contact CTA on the page.
+const whatsappUrl = buildWhatsAppUrl(
+  siteData.company.whatsappNumber,
+  siteData.company.whatsappMessage
+);
 
 function App() {
   return (
     <ErrorBoundary>
-      <Routes>
-        <Route path="/marco-duque" element={<MarcoDuquePage />} />
-        <Route path="/*" element={<MainLayout />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/marco-duque" element={<MarcoDuquePage />} />
+          <Route path="/*" element={<MainLayout />} />
+        </Routes>
+      </Suspense>
     </ErrorBoundary>
   );
 }
 
 function MainLayout() {
-  const { state, actions } = useUiModals();
+  const { legalModal, openLegal, closeLegal } = useLegalModal();
 
-  const legalContent = state.legalModal ? siteData.legal[state.legalModal] : null;
+  const legalContent = legalModal ? siteData.legal[legalModal] : null;
 
   return (
     <div className="min-h-screen bg-paper">
       <Header
         navigation={siteData.navigation}
-        onCTAClick={actions.openContact}
+        email={siteData.company.email}
+        whatsappUrl={whatsappUrl}
       />
       <Hero
         data={siteData.hero}
-        onPrimaryClick={actions.openContact}
+        whatsappUrl={whatsappUrl}
         onSecondaryClick={() => scrollToSection('#services')}
       />
-      <Services data={siteData} />
-      <ProblemSolution data={siteData} />
-      <Process data={siteData} />
-      <Features data={siteData} />
-      <CTA data={siteData.cta} onContactClick={actions.openContact} />
+      <Services items={siteData.services} />
+      <ProblemSolution items={siteData.problemSolution} />
+      <Process items={siteData.process} />
+      <Features items={siteData.features} />
+      <CTA data={siteData.cta} whatsappUrl={whatsappUrl} />
       <Footer
         company={siteData.company}
         footer={siteData.footer}
-        onLegalLinkClick={actions.openLegal}
-        onContactClick={actions.openContact}
+        whatsappUrl={whatsappUrl}
+        onLegalLinkClick={openLegal}
       />
 
       {legalContent && (
         <LegalModal
-          isOpen={state.legalModal !== null}
-          onClose={actions.closeLegal}
+          isOpen={legalModal !== null}
+          onClose={closeLegal}
           title={legalContent.title}
           content={legalContent.content}
         />
       )}
-
-      <ContactFormModal
-        isOpen={state.contactOpen}
-        onClose={actions.closeContact}
-        pgpUrl={siteData.company.pgpUrl}
-        challenges={siteData.contactChallenges}
-      />
     </div>
   );
 }

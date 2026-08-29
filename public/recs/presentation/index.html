@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RECS — Operations Manual</title>
+<title>RECS — Client Presentation</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,6 @@
     position: relative;
     overflow: hidden;
   }
-  /* soft green aura, matching the landing */
   body::before {
     content: "";
     position: absolute;
@@ -130,8 +129,9 @@
   .btn .arrow { color: var(--accent); font-size: 18px; transition: transform .25s; }
   .btn:hover .arrow { transform: translateX(4px); }
   .divider { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
-  .back { font-size: 12px; color: var(--muted); text-decoration: none; transition: color .25s; }
-  .back:hover { color: var(--accent); }
+  .ops-link { display: block; font-size: 12px; color: var(--muted); text-decoration: none; transition: color .25s; margin-top: 10px; }
+  .ops-link:first-of-type { margin-top: 0; }
+  .ops-link:hover { color: var(--accent); }
   .built-by { position: relative; margin-top: 32px; font-size: 11px; color: var(--faint); }
   .built-by a { color: var(--accent); text-decoration: none; font-weight: 500; }
   .built-by a:hover { text-decoration: underline; }
@@ -141,26 +141,26 @@
   <div class="card">
     <div class="logo">RECS</div>
     <div class="eyebrow">by Shlomo</div>
-    <div class="title">Operations Manual</div>
-    <div class="subtitle">Select your language to access the<br>full operational guide.</div>
+    <div class="title">Client Presentation</div>
+    <div class="subtitle">The executive walkthrough of the delivered platform.<br>Select your language to open the deck.</div>
 
     <div class="lang-label">Choose language / Elige idioma</div>
     <div class="buttons">
-      <a href="/recs/manual/en/" class="btn">
+      <a href="/recs/presentation/en/" class="btn">
         <span class="flag">🇺🇸</span>
-        <span class="lang">English<span>Operations Manual &amp; User Guide</span></span>
+        <span class="lang">English<span>Executive Platform Walkthrough</span></span>
         <span class="arrow">→</span>
       </a>
-      <a href="/recs/manual/es/" class="btn">
+      <a href="/recs/presentation/es/" class="btn">
         <span class="flag">🇪🇸</span>
-        <span class="lang">Español<span>Manual Operativo y Guía de Usuario</span></span>
+        <span class="lang">Español<span>Presentación Ejecutiva de la Plataforma</span></span>
         <span class="arrow">→</span>
       </a>
     </div>
 
     <hr class="divider">
-    <a href="/recs/presentation/" class="back" style="display:block;margin-bottom:10px;">Client presentation (executive walkthrough) →</a>
-    <a href="/recs/overview/" class="back">← Platform Overview for prospective clients</a>
+    <a href="/recs/overview/" class="ops-link">Platform Overview for prospective clients →</a>
+    <a href="/recs/manual/" class="ops-link">Operations manual (for existing clients) →</a>
   </div>
 
   <div class="built-by">Engineered by <a href="https://www.shlomo.us" target="_blank" rel="noopener noreferrer">Shlomo Software Solutions LLC</a></div>

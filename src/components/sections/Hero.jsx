@@ -1,36 +1,14 @@
-import { useEffect, useRef } from 'react';
 import Container from '../layout/Container';
 import Button from '../atomic/Button';
 import { useReveal } from '../../hooks/useReveal';
+import { useParallax } from '../../hooks/useParallax';
 
-const Hero = ({ data, onPrimaryClick, onSecondaryClick }) => {
+const Hero = ({ data, whatsappUrl, onSecondaryClick }) => {
   const { ref, visible } = useReveal({ threshold: 0 });
-  const auraRef = useRef(null);
-  const step = (i) => ({ transitionDelay: `${i * 90}ms` });
-
   // Subtle vertical parallax on the aura: it trails the scroll at ~0.18x,
   // creating depth without motion sickness. Skipped for reduced-motion.
-  useEffect(() => {
-    const el = auraRef.current;
-    if (!el) return;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    let frame = 0;
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        el.style.setProperty('--aura-y', `${window.scrollY * 0.18}px`);
-        frame = 0;
-      });
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
+  const auraRef = useParallax(0.18, '--aura-y');
+  const step = (i) => ({ transitionDelay: `${i * 90}ms` });
 
   return (
     <section className="relative overflow-hidden border-b border-line bg-paper">
@@ -71,7 +49,7 @@ const Hero = ({ data, onPrimaryClick, onSecondaryClick }) => {
             className={`reveal ${visible ? 'is-visible' : ''} mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center`}
             style={step(3)}
           >
-            <Button size="lg" onClick={onPrimaryClick}>
+            <Button size="lg" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               {data.cta.primary}
             </Button>
             <button
